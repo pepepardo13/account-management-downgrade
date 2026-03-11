@@ -65,6 +65,11 @@
   max-width: 1312px;
 }
 
+.annualHeroInner {
+  gap: 40px;
+  max-width: 1024px;
+}
+
 .planSummary {
   display: flex;
   flex: 1 1 0;
@@ -72,6 +77,10 @@
   gap: 8px;
   justify-content: center;
   min-width: 280px;
+}
+
+.annualPlanSummary {
+  max-width: 534px;
 }
 
 .eyebrow {

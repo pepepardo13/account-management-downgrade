@@ -367,6 +367,8 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
   };
 
   const config = configs[variant];
+  const isAnnualVariant = config.renewalCadence === "annually";
+  const hasSingleAnnualHeroCard = isAnnualVariant && config.promoCards.length === 1;
 
   const supportLinks: ActionLink[] = [
     {
@@ -424,8 +426,16 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
         </header>
 
         <section className={styles["heroSection"]}>
-          <div className={styles["heroInner"]}>
-            <div className={styles["planSummary"]}>
+          <div
+            className={`${styles["heroInner"]} ${
+              isAnnualVariant ? styles["annualHeroInner"] : ""
+            }`}
+          >
+            <div
+              className={`${styles["planSummary"]} ${
+                hasSingleAnnualHeroCard ? styles["annualPlanSummary"] : ""
+              }`}
+            >
               <p className={styles["eyebrow"]}>Current Plan</p>
               <h1 className={styles["pageTitle"]}>{config.title}</h1>
               <p className={styles["description"]}>
