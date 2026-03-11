@@ -436,7 +436,18 @@
   }
 
   .heroCards:not(.heroCardsSingle) .promoCard {
-    min-height: 304px;
+    gap: 16px;
+    height: 352px;
+    min-height: 352px;
+    padding: 20px 20px 16px;
+  }
+
+  .heroCards:not(.heroCardsSingle) .cardActions {
+    gap: 12px;
+  }
+
+  .heroCards:not(.heroCardsSingle) .cardSpacer {
+    min-height: 0;
   }
 
   .footerMeta {
