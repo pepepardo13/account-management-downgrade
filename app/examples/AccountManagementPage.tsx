@@ -438,12 +438,20 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
             >
               <p className={styles["eyebrow"]}>Current Plan</p>
               <h1 className={styles["pageTitle"]}>{config.title}</h1>
-              <p className={styles["description"]}>
+              <p
+                className={`${styles["description"]} ${
+                  isAnnualVariant ? styles["annualDescription"] : ""
+                }`}
+              >
                 Your subscription renews <strong>{config.renewalCadence}</strong>.
                 {" "}Your next payment of <strong>{config.nextPaymentAmount}</strong>
                 {" "}(excluding tax and discounts) is scheduled for{" "}
-                <strong>{config.nextPaymentDate}</strong> in {config.nextPaymentDays}{" "}
-                days.
+                <strong>{config.nextPaymentDate}</strong>
+                {isAnnualVariant ? (
+                  <> {"\u2014"} in {config.nextPaymentDays} days.</>
+                ) : (
+                  <> in {config.nextPaymentDays} days.</>
+                )}
               </p>
 
               <div className={styles["planFeature"]}>
