@@ -147,6 +147,16 @@
   height: 352px;
   max-height: 352px;
   min-height: 352px;
+  gap: 16px;
+  padding: 20px 20px 16px;
+}
+
+.coreHeroCards .cardSpacer {
+  display: none;
+}
+
+.coreHeroCards .cardActions {
+  gap: 12px;
 }
 
 .promoCard {
