@@ -20,16 +20,29 @@ const preloadHelperFile = assetEntries.find((entry) =>
 if (preloadHelperFile) {
   const preloadHelperPath = new URL(preloadHelperFile, assetsPath);
   const preloadHelperSource = await readFile(preloadHelperPath, "utf8");
-  const cssErrorHandler =
-    'n.addEventListener("error",()=>h(new Error(`Unable to preload CSS for ${e}`)))';
+  const cssErrorHandlers = [
+    {
+      from: 'n.addEventListener("error",()=>h(new Error(`Unable to preload CSS for ${e}`)))',
+      to: 'n.addEventListener("error",()=>f())',
+    },
+    {
+      from: 'n.addEventListener("error",()=>l(new Error(`Unable to preload CSS for ${e}`)))',
+      to: 'n.addEventListener("error",()=>c())',
+    },
+  ];
 
-  if (preloadHelperSource.includes(cssErrorHandler)) {
-    await writeFile(
-      preloadHelperPath,
-      preloadHelperSource.replace(
-        cssErrorHandler,
-        'n.addEventListener("error",()=>f())',
-      ),
-    );
+  let patchedPreloadHelperSource = preloadHelperSource;
+
+  for (const cssErrorHandler of cssErrorHandlers) {
+    if (patchedPreloadHelperSource.includes(cssErrorHandler.from)) {
+      patchedPreloadHelperSource = patchedPreloadHelperSource.replace(
+        cssErrorHandler.from,
+        cssErrorHandler.to,
+      );
+    }
+  }
+
+  if (patchedPreloadHelperSource !== preloadHelperSource) {
+    await writeFile(preloadHelperPath, patchedPreloadHelperSource);
   }
 }
