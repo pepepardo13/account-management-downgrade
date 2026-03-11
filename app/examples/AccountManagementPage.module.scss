@@ -143,6 +143,12 @@
   grid-template-columns: minmax(280px, 349px);
 }
 
+.coreHeroCards .promoCard {
+  height: 352px;
+  max-height: 352px;
+  min-height: 352px;
+}
+
 .promoCard {
   background: var(--panel-background);
   border: 1px solid var(--border-muted);
