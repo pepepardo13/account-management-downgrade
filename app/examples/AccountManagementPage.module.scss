@@ -153,6 +153,7 @@
   background: var(--panel-background);
   border: 1px solid var(--border-muted);
   border-radius: 16px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 24px;
