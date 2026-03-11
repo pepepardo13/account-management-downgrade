@@ -3,10 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "storybook": "./node_modules/.bin/storybook dev -p 6006",
+    "build-storybook": "./node_modules/.bin/storybook build",
     "patch-pages-iframe": "node ./scripts/patch-pages-iframe.mjs",
-    "build-pages": "storybook build -o docs && node ./scripts/patch-pages-iframe.mjs"
+    "build-pages": "./node_modules/.bin/storybook build -o docs && node ./scripts/patch-pages-iframe.mjs"
   },
   "dependencies": {
     "@envato/design-system": "^1.2.0",

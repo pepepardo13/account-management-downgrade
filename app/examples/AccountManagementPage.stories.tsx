@@ -33,8 +33,26 @@ export const PlusMonthly: Story = {
   },
 };
 
+export const CoreAnnual: Story = {
+  args: {
+    variant: "core-annual",
+  },
+};
+
+export const PlusAnnual: Story = {
+  args: {
+    variant: "plus-annual",
+  },
+};
+
 export const UltimateMonthly: Story = {
   args: {
     variant: "ultimate-monthly",
+  },
+};
+
+export const UltimateAnnual: Story = {
+  args: {
+    variant: "ultimate-annual",
   },
 };

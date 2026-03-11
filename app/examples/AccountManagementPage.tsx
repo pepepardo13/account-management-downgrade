@@ -50,15 +50,22 @@ type PromoCard = {
 type PageConfig = {
   copyright: string;
   manageSubscription: ActionLink[];
+  nextPaymentAmount: string;
+  nextPaymentDate: string;
+  nextPaymentDays: number;
   planFeature: PlanFeature;
   promoCards: PromoCard[];
+  renewalCadence: "monthly" | "annually";
   title: string;
 };
 
 export type AccountManagementVariant =
   | "core-monthly"
+  | "core-annual"
   | "plus-monthly"
-  | "ultimate-monthly";
+  | "plus-annual"
+  | "ultimate-monthly"
+  | "ultimate-annual";
 
 type Props = {
   variant?: AccountManagementVariant;
@@ -155,6 +162,10 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
   const configs: Record<AccountManagementVariant, PageConfig> = {
     "core-monthly": {
       title: "Core Individual Subscription",
+      renewalCadence: "monthly",
+      nextPaymentAmount: "USD $33.00",
+      nextPaymentDate: "Jan 07, 2027",
+      nextPaymentDays: 360,
       planFeature: { count: "10" },
       promoCards: [
         {
@@ -197,8 +208,48 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       copyright:
         "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
     },
+    "core-annual": {
+      title: "Core Individual Subscription",
+      renewalCadence: "annually",
+      nextPaymentAmount: "USD $00.00",
+      nextPaymentDate: "Nov 27, 2025",
+      nextPaymentDays: 360,
+      planFeature: { count: "10" },
+      promoCards: [
+        {
+          title: "Elevate your plan!",
+          body: "Upgrade to the Plus or Ultimate plan and unlock up to 100 or unlimited generations.",
+          ctaHref: "#upgrade-details",
+          ctaLabel: "Explore more",
+          emphasized: true,
+          usage: { current: "5", total: "10" },
+          actions: [
+            { label: "Upgrade to Ultimate", variant: "primary" },
+            {
+              label: "Upgrade to Plus",
+              outlined: true,
+              radius: "4px",
+              variant: "secondary",
+            },
+          ],
+        },
+      ],
+      manageSubscription: [
+        { href: "#", icon: "group-add", label: "Upgrade to Teams" },
+        { href: "#", icon: "credit-card", label: "Payment method" },
+        { href: "#", icon: "receipt", label: "Billing information" },
+        { href: "#", icon: "documents", label: "Payment history" },
+        { href: "#", icon: "clear", label: "Cancel subscription" },
+      ],
+      copyright:
+        "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+    },
     "plus-monthly": {
       title: "Plus Individual Subscription",
+      renewalCadence: "monthly",
+      nextPaymentAmount: "USD $33.00",
+      nextPaymentDate: "Jan 07, 2027",
+      nextPaymentDays: 360,
       planFeature: { count: "100" },
       promoCards: [
         {
@@ -233,8 +284,40 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       copyright:
         "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
     },
+    "plus-annual": {
+      title: "Plus Individual Subscription",
+      renewalCadence: "annually",
+      nextPaymentAmount: "USD $00.00",
+      nextPaymentDate: "Nov 27, 2025",
+      nextPaymentDays: 360,
+      planFeature: { count: "100" },
+      promoCards: [
+        {
+          title: "Elevate your plan!",
+          body: "Upgrade to the Plus or Ultimate plan and unlock up to 100 or unlimited generations.",
+          ctaHref: "#upgrade-details",
+          ctaLabel: "Explore more",
+          emphasized: true,
+          usage: { current: "50", total: "100" },
+          actions: [{ label: "Upgrade to Ultimate", variant: "primary" }],
+        },
+      ],
+      manageSubscription: [
+        { href: "#", icon: "group-add", label: "Upgrade to Teams" },
+        { href: "#", icon: "credit-card", label: "Payment method" },
+        { href: "#", icon: "receipt", label: "Billing information" },
+        { href: "#", icon: "documents", label: "Payment history" },
+        { href: "#", icon: "clear", label: "Cancel subscription" },
+      ],
+      copyright:
+        "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+    },
     "ultimate-monthly": {
       title: "Ultimate Individual Subscription",
+      renewalCadence: "monthly",
+      nextPaymentAmount: "USD $33.00",
+      nextPaymentDate: "Jan 07, 2027",
+      nextPaymentDays: 360,
       planFeature: { badge: "Unlimited" },
       promoCards: [
         {
@@ -250,6 +333,25 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
           ],
         },
       ],
+      manageSubscription: [
+        { href: "#", icon: "group-add", label: "Upgrade to Teams" },
+        { href: "#", icon: "swap-horizontal", label: "Change my plan" },
+        { href: "#", icon: "credit-card", label: "Payment method" },
+        { href: "#", icon: "receipt", label: "Billing information" },
+        { href: "#", icon: "documents", label: "Payment history" },
+        { href: "#", icon: "clear", label: "Cancel subscription" },
+      ],
+      copyright:
+        "© 2026 Envato Trademarks and brands are the property of their respective owners.",
+    },
+    "ultimate-annual": {
+      title: "Ultimate Individual Subscription",
+      renewalCadence: "annually",
+      nextPaymentAmount: "USD $00.00",
+      nextPaymentDate: "Nov 27, 2025",
+      nextPaymentDays: 360,
+      planFeature: { badge: "Unlimited" },
+      promoCards: [],
       manageSubscription: [
         { href: "#", icon: "group-add", label: "Upgrade to Teams" },
         { href: "#", icon: "swap-horizontal", label: "Change my plan" },
@@ -326,9 +428,10 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
               <p className={styles["eyebrow"]}>Current Plan</p>
               <h1 className={styles["pageTitle"]}>{config.title}</h1>
               <p className={styles["description"]}>
-                Your subscription renews <strong>monthly</strong>. Your next
-                payment of <strong>USD $33.00</strong> (excluding tax and
-                discounts) is scheduled for <strong>Jan 07, 2027</strong> in 360
+                Your subscription renews <strong>{config.renewalCadence}</strong>.
+                {" "}Your next payment of <strong>{config.nextPaymentAmount}</strong>
+                {" "}(excluding tax and discounts) is scheduled for{" "}
+                <strong>{config.nextPaymentDate}</strong> in {config.nextPaymentDays}{" "}
                 days.
               </p>
 
@@ -348,15 +451,17 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
               </div>
             </div>
 
-            <div
-              className={`${styles["heroCards"]} ${
-                config.promoCards.length === 1 ? styles["heroCardsSingle"] : ""
-              }`}
-            >
-              {config.promoCards.map((card) => (
-                <PromoCardView card={card} key={card.title} />
-              ))}
-            </div>
+            {config.promoCards.length > 0 ? (
+              <div
+                className={`${styles["heroCards"]} ${
+                  config.promoCards.length === 1 ? styles["heroCardsSingle"] : ""
+                }`}
+              >
+                {config.promoCards.map((card) => (
+                  <PromoCardView card={card} key={card.title} />
+                ))}
+              </div>
+            ) : null}
           </div>
         </section>
 
