@@ -261,6 +261,12 @@
   min-height: 0;
 }
 
+.coreMonthlyAltHeroCardsCollapsed .promoCard {
+  height: auto;
+  max-height: none;
+  min-height: 0;
+}
+
 .coreAnnualHeroCards .promoCard {
   gap: 24px;
   height: auto;
@@ -962,6 +968,12 @@
   }
 
   .coreMonthlyAltHeroCards .promoCardCollapsibleUsage.promoCardUsageCollapsed {
+    height: auto;
+    max-height: none;
+    min-height: 0;
+  }
+
+  .coreMonthlyAltHeroCardsCollapsed .promoCard {
     height: auto;
     max-height: none;
     min-height: 0;

@@ -123,16 +123,19 @@ function ActionItem({ action }: { action: ActionLink }) {
 function PromoCardView({
   card,
   collapsibleUsage = false,
+  isUsageExpanded = true,
+  onToggleUsage,
 }: {
   card: PromoCard;
   collapsibleUsage?: boolean;
+  isUsageExpanded?: boolean;
+  onToggleUsage?: () => void;
 }) {
   const remainingGenerations = card.usage
     ? Math.max(Number(card.usage.total) - Number(card.usage.current), 0)
     : 0;
   const hasSingleActionUsageLayout = Boolean(card.usage) && card.actions.length === 1;
   const hasCollapsibleUsage = Boolean(card.usage) && collapsibleUsage;
-  const [isUsageExpanded, setIsUsageExpanded] = useState(true);
 
   return (
     <article
@@ -155,7 +158,7 @@ function PromoCardView({
                 aria-expanded={isUsageExpanded}
                 aria-label={isUsageExpanded ? "Collapse generation details" : "Expand generation details"}
                 className={styles["usageToggle"]}
-                onClick={() => setIsUsageExpanded((current) => !current)}
+                onClick={onToggleUsage}
                 type="button"
               >
                 <Icon name={isUsageExpanded ? "chevron-up" : "chevron-down"} size="1x" />
@@ -228,6 +231,7 @@ function PromoCardView({
 
 export function AccountManagementPage({ variant = "core-monthly" }: Props) {
   const externalUrls = useExternalUrls();
+  const [isCoreMonthlyAltUsageExpanded, setIsCoreMonthlyAltUsageExpanded] = useState(true);
   const isCoreMonthlyVariant = variant === "core-monthly";
   const isCoreMonthlyAltVariant = variant === "core-monthly-alt";
   const isCoreAnnualVariant = variant === "core-annual";
@@ -675,6 +679,10 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                 } ${
                   isCoreMonthlyAltVariant ? styles["coreMonthlyAltHeroCards"] : ""
                 } ${
+                  isCoreMonthlyAltVariant && !isCoreMonthlyAltUsageExpanded
+                    ? styles["coreMonthlyAltHeroCardsCollapsed"]
+                    : ""
+                } ${
                   isPlusMonthlyVariant ? styles["plusMonthlyHeroCards"] : ""
                 } ${
                   isUltimateMonthlyVariant ? styles["ultimateMonthlyHeroCards"] : ""
@@ -686,7 +694,13 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                   <PromoCardView
                     card={card}
                     collapsibleUsage={isCoreMonthlyAltVariant}
+                    isUsageExpanded={isCoreMonthlyAltUsageExpanded}
                     key={card.title}
+                    onToggleUsage={
+                      isCoreMonthlyAltVariant
+                        ? () => setIsCoreMonthlyAltUsageExpanded((current) => !current)
+                        : undefined
+                    }
                   />
                 ))}
               </div>
