@@ -165,9 +165,9 @@
 }
 
 .coreHeroCards .promoCard {
-  height: 352px;
-  max-height: 352px;
-  min-height: 352px;
+  height: 424px;
+  max-height: 424px;
+  min-height: 424px;
   gap: 16px;
   padding: 20px 20px 16px;
 }
@@ -220,6 +220,26 @@
 
 .usageMeta strong {
   font-size: 14px;
+}
+
+.usageDetails {
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.usageDetailRow {
+  align-items: baseline;
+  color: inherit;
+  display: flex;
+  font-size: 14px;
+  justify-content: space-between;
+  line-height: 1.5;
+}
+
+.usageDetailRow span:last-child {
+  text-align: right;
 }
 
 .progressTrack {
@@ -475,8 +495,8 @@
 
   .heroCards:not(.heroCardsSingle) .promoCard {
     gap: 16px;
-    height: 352px;
-    min-height: 352px;
+    height: 424px;
+    min-height: 424px;
     padding: 20px 20px 16px;
   }
 

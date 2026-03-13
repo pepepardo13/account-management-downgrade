@@ -43,6 +43,7 @@ type PromoCard = {
   title: string;
   usage?: {
     current: string;
+    resetDate: string;
     total: string;
   };
 };
@@ -114,6 +115,16 @@ function PromoCardView({ card }: { card: PromoCard }) {
               }}
             />
           </div>
+          <div className={styles["usageDetails"]}>
+            <div className={styles["usageDetailRow"]}>
+              <span>Total generations</span>
+              <span>{card.usage.total}</span>
+            </div>
+            <div className={styles["usageDetailRow"]}>
+              <span>Plan resets</span>
+              <span>{card.usage.resetDate}</span>
+            </div>
+          </div>
         </div>
       )}
 
@@ -176,7 +187,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
           ctaHref: "#upgrade-details",
           ctaLabel: "Explore more",
           emphasized: true,
-          usage: { current: "5", total: "10" },
+          usage: { current: "5", total: "10", resetDate: "14 April, 2026" },
           actions: [
             { label: "Upgrade to Ultimate", variant: "primary" },
             {
@@ -224,7 +235,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
           ctaHref: "#upgrade-details",
           ctaLabel: "Explore more",
           emphasized: true,
-          usage: { current: "5", total: "10" },
+          usage: { current: "5", total: "10", resetDate: "14 April, 2026" },
           actions: [
             { label: "Upgrade to Ultimate", variant: "primary" },
             {
@@ -260,7 +271,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
           ctaHref: "#upgrade-details",
           ctaLabel: "Explore more",
           emphasized: true,
-          usage: { current: "50", total: "100" },
+          usage: { current: "50", total: "100", resetDate: "14 April, 2026" },
           actions: [{ label: "Upgrade to Ultimate", variant: "primary" }],
         },
         {
@@ -300,7 +311,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
           ctaHref: "#upgrade-details",
           ctaLabel: "Explore more",
           emphasized: true,
-          usage: { current: "50", total: "100" },
+          usage: { current: "50", total: "100", resetDate: "14 April, 2026" },
           actions: [{ label: "Upgrade to Ultimate", variant: "primary" }],
         },
       ],
