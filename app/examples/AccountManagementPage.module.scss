@@ -357,19 +357,34 @@
   width: 100%;
 }
 
-.plusMonthlyHeroCards,
+.plusMonthlyHeroCards {
+  align-self: center;
+  gap: 20px;
+  grid-template-columns: repeat(2, 244px);
+}
+
 .ultimateMonthlyHeroCards {
   align-self: center;
   gap: 20px;
   grid-template-columns: repeat(2, 244px);
 }
 
-.plusMonthlyHeroCards.heroCardsSingle,
+.plusMonthlyHeroCards.heroCardsSingle {
+  grid-template-columns: 280px;
+}
+
 .ultimateMonthlyHeroCards.heroCardsSingle {
   grid-template-columns: 280px;
 }
 
-.plusMonthlyHeroCards .promoCard,
+.plusMonthlyHeroCards .promoCard {
+  gap: 24px;
+  height: 336px;
+  max-height: 336px;
+  min-height: 336px;
+  padding: 24px;
+}
+
 .ultimateMonthlyHeroCards .promoCard {
   gap: 24px;
   height: 336px;
@@ -378,12 +393,18 @@
   padding: 24px;
 }
 
-.plusMonthlyHeroCards .promoCardPrimary,
+.plusMonthlyHeroCards .promoCardPrimary {
+  border-width: 2px;
+}
+
 .ultimateMonthlyHeroCards .promoCardPrimary {
   border-width: 2px;
 }
 
-.plusMonthlyHeroCards .promoCard:not(.promoCardPrimary),
+.plusMonthlyHeroCards .promoCard:not(.promoCardPrimary) {
+  border-color: #8c8c8c;
+}
+
 .ultimateMonthlyHeroCards .promoCard:not(.promoCardPrimary) {
   border-color: #8c8c8c;
 }
@@ -391,7 +412,11 @@
 .plusMonthlyHeroCards .usageMeter,
 .plusMonthlyHeroCards .progressTrack,
 .plusMonthlyHeroCards .usageDetails,
-.plusMonthlyHeroCards .cardCopy,
+.plusMonthlyHeroCards .cardCopy {
+  max-width: none;
+  width: 100%;
+}
+
 .ultimateMonthlyHeroCards .usageMeter,
 .ultimateMonthlyHeroCards .progressTrack,
 .ultimateMonthlyHeroCards .usageDetails,
@@ -400,59 +425,96 @@
   width: 100%;
 }
 
-.plusMonthlyHeroCards .usageMeta,
+.plusMonthlyHeroCards .usageMeta {
+  font-size: 14px;
+  letter-spacing: 0.28px;
+}
+
 .ultimateMonthlyHeroCards .usageMeta {
   font-size: 14px;
   letter-spacing: 0.28px;
 }
 
-.plusMonthlyHeroCards .usageMeta strong,
+.plusMonthlyHeroCards .usageMeta strong {
+  font-size: 14px;
+}
+
 .ultimateMonthlyHeroCards .usageMeta strong {
   font-size: 14px;
 }
 
-.plusMonthlyHeroCards .usageDetailRow,
+.plusMonthlyHeroCards .usageDetailRow {
+  font-size: 12px;
+  letter-spacing: 0.24px;
+}
+
 .ultimateMonthlyHeroCards .usageDetailRow {
   font-size: 12px;
   letter-spacing: 0.24px;
 }
 
-.plusMonthlyHeroCards .cardCopy,
+.plusMonthlyHeroCards .cardCopy {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 .ultimateMonthlyHeroCards .cardCopy {
   font-size: 14px;
   line-height: 1.5;
 }
 
-.plusMonthlyHeroCards .promoCardBottomAlignedActions .cardCopy,
+.plusMonthlyHeroCards .promoCardBottomAlignedActions .cardCopy {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
 .ultimateMonthlyHeroCards .promoCardBottomAlignedActions .cardCopy {
   font-size: 16px;
   line-height: 1.5;
 }
 
-.plusMonthlyHeroCards .cardSpacer,
+.plusMonthlyHeroCards .cardSpacer {
+  display: none;
+}
+
 .ultimateMonthlyHeroCards .cardSpacer {
   display: none;
 }
 
-.plusMonthlyHeroCards .cardActions,
+.plusMonthlyHeroCards .cardActions {
+  gap: 24px;
+  width: 100%;
+}
+
 .ultimateMonthlyHeroCards .cardActions {
   gap: 24px;
   width: 100%;
 }
 
 .plusMonthlyHeroCards .outlinedButton,
-.plusMonthlyHeroCards .outlinedButton :global(button),
+.plusMonthlyHeroCards .outlinedButton :global(button) {
+  width: 100%;
+}
+
 .ultimateMonthlyHeroCards .outlinedButton,
 .ultimateMonthlyHeroCards .outlinedButton :global(button) {
   width: 100%;
 }
 
-.plusMonthlyHeroCards .promoCardBottomAlignedActions .cardActions,
+.plusMonthlyHeroCards .promoCardBottomAlignedActions .cardActions {
+  margin-top: auto;
+}
+
 .ultimateMonthlyHeroCards .promoCardBottomAlignedActions .cardActions {
   margin-top: auto;
 }
 
-.plusMonthlyHeroCards .promoCardSingleActionBottomAligned .cardActions,
+.plusMonthlyHeroCards .promoCardSingleActionBottomAligned .cardActions {
+  margin-top: 0;
+  position: static;
+  width: 100%;
+}
+
 .ultimateMonthlyHeroCards .promoCardSingleActionBottomAligned .cardActions {
   bottom: 24px;
   left: 24px;
@@ -462,7 +524,10 @@
   width: auto;
 }
 
-.plusMonthlyHeroCards .promoCardSingleActionBottomAligned,
+.plusMonthlyHeroCards .promoCardSingleActionBottomAligned {
+  position: static;
+}
+
 .ultimateMonthlyHeroCards .promoCardSingleActionBottomAligned {
   position: relative;
 }
