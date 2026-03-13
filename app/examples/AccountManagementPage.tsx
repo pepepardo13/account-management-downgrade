@@ -66,9 +66,12 @@ type PageConfig = {
 export type AccountManagementVariant =
   | "core-monthly"
   | "core-monthly-alt"
+  | "core-annual-alt"
   | "core-annual"
   | "plus-monthly"
+  | "plus-monthly-alt"
   | "plus-annual"
+  | "plus-annual-alt"
   | "ultimate-monthly"
   | "ultimate-annual";
 
@@ -231,14 +234,23 @@ function PromoCardView({
 
 export function AccountManagementPage({ variant = "core-monthly" }: Props) {
   const externalUrls = useExternalUrls();
-  const [isCoreMonthlyAltUsageExpanded, setIsCoreMonthlyAltUsageExpanded] = useState(false);
+  const [isAltUsageExpanded, setIsAltUsageExpanded] = useState(false);
   const isCoreMonthlyVariant = variant === "core-monthly";
   const isCoreMonthlyAltVariant = variant === "core-monthly-alt";
+  const isCoreMonthlyFamilyVariant = isCoreMonthlyVariant || isCoreMonthlyAltVariant;
   const isCoreAnnualVariant = variant === "core-annual";
+  const isCoreAnnualAltVariant = variant === "core-annual-alt";
+  const isCoreAnnualFamilyVariant = isCoreAnnualVariant || isCoreAnnualAltVariant;
   const isPlusMonthlyVariant = variant === "plus-monthly";
+  const isPlusMonthlyAltVariant = variant === "plus-monthly-alt";
+  const isPlusMonthlyFamilyVariant = isPlusMonthlyVariant || isPlusMonthlyAltVariant;
   const isPlusAnnualVariant = variant === "plus-annual";
+  const isPlusAnnualAltVariant = variant === "plus-annual-alt";
+  const isPlusAnnualFamilyVariant = isPlusAnnualVariant || isPlusAnnualAltVariant;
   const isUltimateMonthlyVariant = variant === "ultimate-monthly";
   const isUltimateAnnualVariant = variant === "ultimate-annual";
+  const isAltVariant =
+    isCoreMonthlyAltVariant || isCoreAnnualAltVariant || isPlusMonthlyAltVariant || isPlusAnnualAltVariant;
   const pricingUrl = new URL("/pricing", externalUrls.storefront).toString();
   const forumsUrl = "https://forums.envato.com";
   const cookiesUrl = `${externalUrls.privacyPolicy}#cookies`;
@@ -455,6 +467,41 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       copyright:
         "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
     },
+    "core-annual-alt": {
+      title: "Core Individual Subscription",
+      renewalCadence: "annually",
+      nextPaymentAmount: "USD $00.00",
+      nextPaymentDate: "Nov 27, 2025",
+      nextPaymentDays: 360,
+      planFeature: { count: "10" },
+      promoCards: [
+        {
+          title: "Elevate your plan!",
+          body: "Upgrade to the Plus or Ultimate plan and unlock up to 100 or unlimited generations.",
+          ctaHref: pricingUrl,
+          ctaLabel: "Explore more",
+          emphasized: true,
+          usage: { current: "5", total: "10", resetDate: "14 April, 2026" },
+          actions: [
+            {
+              href: `${pricingUrl}?plan=ultimate`,
+              label: "Upgrade to Ultimate",
+              variant: "primary",
+            },
+            {
+              href: `${pricingUrl}?plan=plus`,
+              label: "Upgrade to Plus",
+              outlined: true,
+              radius: "4px",
+              variant: "secondary",
+            },
+          ],
+        },
+      ],
+      manageSubscription: sharedManageSubscriptionLinks,
+      copyright:
+        "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+    },
     "plus-monthly": {
       title: "Plus Individual Subscription",
       renewalCadence: "monthly",
@@ -496,7 +543,76 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       copyright:
         "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
     },
+    "plus-monthly-alt": {
+      title: "Plus Individual Subscription",
+      renewalCadence: "monthly",
+      nextPaymentAmount: "USD $33.00",
+      nextPaymentDate: "Jan 07, 2027",
+      nextPaymentDays: 360,
+      planFeature: { count: "100" },
+      promoCards: [
+        {
+          title: "Elevate your plan!",
+          body: "Upgrade to the Plus or Ultimate plan and unlock up to 100 or unlimited generations.",
+          ctaHref: pricingUrl,
+          ctaLabel: "Explore more",
+          emphasized: true,
+          usage: { current: "50", total: "100", resetDate: "14 April, 2026" },
+          actions: [
+            {
+              href: `${pricingUrl}?plan=ultimate`,
+              label: "Upgrade to Ultimate",
+              variant: "primary",
+            },
+          ],
+        },
+        {
+          title: "Switch to annual payments and save 50%",
+          body: "Save $198.00/year ($16.50/month) with an annual plan, same unlimited access, half the price.",
+          actions: [
+            {
+              href: withHash(externalUrls.myAccount, "switch-to-annual"),
+              label: "Switch to annual",
+              outlined: true,
+              radius: "8px",
+              variant: "secondary",
+            },
+          ],
+        },
+      ],
+      manageSubscription: sharedManageSubscriptionLinks,
+      copyright:
+        "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+    },
     "plus-annual": {
+      title: "Plus Individual Subscription",
+      renewalCadence: "annually",
+      nextPaymentAmount: "USD $00.00",
+      nextPaymentDate: "Nov 27, 2025",
+      nextPaymentDays: 360,
+      planFeature: { count: "100" },
+      promoCards: [
+        {
+          title: "Elevate your plan!",
+          body: "Upgrade to the Plus or Ultimate plan and unlock up to 100 or unlimited generations.",
+          ctaHref: pricingUrl,
+          ctaLabel: "Explore more",
+          emphasized: true,
+          usage: { current: "50", total: "100", resetDate: "14 April, 2026" },
+          actions: [
+            {
+              href: `${pricingUrl}?plan=ultimate`,
+              label: "Upgrade to Ultimate",
+              variant: "primary",
+            },
+          ],
+        },
+      ],
+      manageSubscription: sharedManageSubscriptionLinks,
+      copyright:
+        "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+    },
+    "plus-annual-alt": {
       title: "Plus Individual Subscription",
       renewalCadence: "annually",
       nextPaymentAmount: "USD $00.00",
@@ -618,7 +734,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
             className={`${styles["heroInner"]} ${
               isAnnualVariant ? styles["annualHeroInner"] : ""
             } ${
-              isPlusMonthlyVariant ? styles["plusMonthlyHeroInner"] : ""
+              isPlusMonthlyFamilyVariant ? styles["plusMonthlyHeroInner"] : ""
             } ${
               isUltimateMonthlyVariant ? styles["ultimateMonthlyHeroInner"] : ""
             }`}
@@ -627,7 +743,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
               className={`${styles["planSummary"]} ${
                 hasSingleAnnualHeroCard ? styles["annualPlanSummary"] : ""
               } ${
-                isPlusMonthlyVariant ? styles["plusMonthlyPlanSummary"] : ""
+                isPlusMonthlyFamilyVariant ? styles["plusMonthlyPlanSummary"] : ""
               } ${
                 isUltimateMonthlyVariant ? styles["ultimateMonthlyPlanSummary"] : ""
               }`}
@@ -669,21 +785,21 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
             {config.promoCards.length > 0 ? (
               <div
                 className={`${styles["heroCards"]} ${
-                  isPlusAnnualVariant ? styles["plusAnnualHeroCards"] : ""
+                  isPlusAnnualFamilyVariant ? styles["plusAnnualHeroCards"] : ""
                 } ${
                   isUltimateAnnualVariant ? styles["ultimateAnnualHeroCards"] : ""
                 } ${
-                  isCoreMonthlyVariant || isCoreMonthlyAltVariant ? styles["coreMonthlyHeroCards"] : ""
+                  isCoreMonthlyFamilyVariant ? styles["coreMonthlyHeroCards"] : ""
                 } ${
-                  isCoreAnnualVariant ? styles["coreAnnualHeroCards"] : ""
+                  isCoreAnnualFamilyVariant ? styles["coreAnnualHeroCards"] : ""
                 } ${
-                  isCoreMonthlyAltVariant ? styles["coreMonthlyAltHeroCards"] : ""
+                  isAltVariant ? styles["collapsibleHeroCards"] : ""
                 } ${
-                  isCoreMonthlyAltVariant && !isCoreMonthlyAltUsageExpanded
-                    ? styles["coreMonthlyAltHeroCardsCollapsed"]
+                  isAltVariant && !isAltUsageExpanded
+                    ? styles["collapsibleHeroCardsCollapsed"]
                     : ""
                 } ${
-                  isPlusMonthlyVariant ? styles["plusMonthlyHeroCards"] : ""
+                  isPlusMonthlyFamilyVariant ? styles["plusMonthlyHeroCards"] : ""
                 } ${
                   isUltimateMonthlyVariant ? styles["ultimateMonthlyHeroCards"] : ""
                 } ${
@@ -693,12 +809,12 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                 {config.promoCards.map((card) => (
                   <PromoCardView
                     card={card}
-                    collapsibleUsage={isCoreMonthlyAltVariant}
-                    isUsageExpanded={isCoreMonthlyAltUsageExpanded}
+                    collapsibleUsage={isAltVariant}
+                    isUsageExpanded={isAltUsageExpanded}
                     key={card.title}
                     onToggleUsage={
-                      isCoreMonthlyAltVariant
-                        ? () => setIsCoreMonthlyAltUsageExpanded((current) => !current)
+                      isAltVariant
+                        ? () => setIsAltUsageExpanded((current) => !current)
                         : undefined
                     }
                   />

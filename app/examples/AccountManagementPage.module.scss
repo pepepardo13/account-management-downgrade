@@ -251,17 +251,17 @@
   width: 100%;
 }
 
-.coreMonthlyAltHeroCards .promoCardCollapsibleUsage {
+.collapsibleHeroCards .promoCardCollapsibleUsage {
   align-self: start;
 }
 
-.coreMonthlyAltHeroCards .promoCardCollapsibleUsage.promoCardUsageCollapsed {
+.collapsibleHeroCards .promoCardCollapsibleUsage.promoCardUsageCollapsed {
   height: auto;
   max-height: none;
   min-height: 0;
 }
 
-.coreMonthlyAltHeroCardsCollapsed .promoCard {
+.collapsibleHeroCardsCollapsed .promoCard {
   height: auto;
   max-height: none;
   min-height: 0;
@@ -967,13 +967,13 @@
     min-height: 0;
   }
 
-  .coreMonthlyAltHeroCards .promoCardCollapsibleUsage.promoCardUsageCollapsed {
+  .collapsibleHeroCards .promoCardCollapsibleUsage.promoCardUsageCollapsed {
     height: auto;
     max-height: none;
     min-height: 0;
   }
 
-  .coreMonthlyAltHeroCardsCollapsed .promoCard {
+  .collapsibleHeroCardsCollapsed .promoCard {
     height: auto;
     max-height: none;
     min-height: 0;

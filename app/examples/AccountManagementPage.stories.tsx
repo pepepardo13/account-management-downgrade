@@ -46,9 +46,30 @@ export const CoreAnnual: Story = {
   },
 };
 
+export const CoreAnnualAlt: Story = {
+  name: "Core Annual Alt",
+  args: {
+    variant: "core-annual-alt",
+  },
+};
+
 export const PlusAnnual: Story = {
   args: {
     variant: "plus-annual",
+  },
+};
+
+export const PlusMonthlyAlt: Story = {
+  name: "Plus Monthly Alt",
+  args: {
+    variant: "plus-monthly-alt",
+  },
+};
+
+export const PlusAnnualAlt: Story = {
+  name: "Plus Annual Alt",
+  args: {
+    variant: "plus-annual-alt",
   },
 };
 
