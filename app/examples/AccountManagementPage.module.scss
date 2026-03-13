@@ -201,9 +201,16 @@
   font-size: 24px;
 }
 
+.coreMonthlyHeroCards .usageMeter,
+.coreMonthlyHeroCards .progressTrack,
+.coreMonthlyHeroCards .usageDetails,
+.coreMonthlyHeroCards .cardCopy {
+  max-width: none;
+  width: 100%;
+}
+
 .coreMonthlyHeroCards .usageMeter {
   gap: 8px;
-  width: 301px;
 }
 
 .coreMonthlyHeroCards .usageMeta {
@@ -215,18 +222,9 @@
   font-size: 14px;
 }
 
-.coreMonthlyHeroCards .progressTrack,
-.coreMonthlyHeroCards .usageDetails {
-  width: 301px;
-}
-
 .coreMonthlyHeroCards .usageDetailRow {
   font-size: 12px;
   letter-spacing: 0.24px;
-}
-
-.coreMonthlyHeroCards .cardCopy {
-  max-width: 301px;
 }
 
 .coreMonthlyHeroCards .cardSpacer {
@@ -235,11 +233,12 @@
 
 .coreMonthlyHeroCards .cardActions {
   gap: 16px;
+  width: 100%;
 }
 
 .coreMonthlyHeroCards .promoCardBottomAlignedActions .cardCopy {
   font-size: 16px;
-  max-width: 301px;
+  line-height: 1.5;
 }
 
 .coreMonthlyHeroCards .promoCardBottomAlignedActions .cardActions {
