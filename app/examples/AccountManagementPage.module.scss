@@ -72,12 +72,6 @@
   max-width: 1032px;
 }
 
-.plusMonthlyHeroInner {
-  align-items: stretch;
-  gap: 28px;
-  max-width: 1312px;
-}
-
 .ultimateMonthlyHeroInner {
   align-items: center;
   gap: 56px;
@@ -99,22 +93,12 @@
   max-width: 643px;
 }
 
-.plusMonthlyPlanSummary {
-  flex: 0 0 534px;
-  max-width: 534px;
-}
-
 .ultimateMonthlyPlanSummary {
   flex: 0 0 384px;
   max-width: 384px;
 }
 
 .annualHeroInner .heroCardsSingle {
-  flex: 0 0 349px;
-  width: 349px;
-}
-
-.plusMonthlyHeroInner .heroCardsSingle {
   flex: 0 0 349px;
   width: 349px;
 }
@@ -374,9 +358,8 @@
 }
 
 .plusMonthlyHeroCards {
-  align-self: center;
-  gap: 20px;
-  grid-template-columns: repeat(2, 349px);
+  gap: 28px;
+  grid-template-columns: repeat(2, minmax(280px, 349px));
 }
 
 .ultimateMonthlyHeroCards {
@@ -386,7 +369,7 @@
 }
 
 .plusMonthlyHeroCards.heroCardsSingle {
-  grid-template-columns: 349px;
+  grid-template-columns: minmax(280px, 349px);
 }
 
 .ultimateMonthlyHeroCards.heroCardsSingle {
@@ -844,17 +827,11 @@
     flex-direction: column;
   }
 
-  .plusMonthlyHeroInner {
-    gap: 32px;
-    max-width: 883px;
-  }
-
   .ultimateMonthlyHeroInner {
     gap: 32px;
     max-width: 508px;
   }
 
-  .plusMonthlyPlanSummary,
   .ultimateMonthlyPlanSummary {
     flex: 1 1 auto;
     max-width: 640px;
@@ -864,12 +841,10 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .plusMonthlyHeroCards,
   .ultimateMonthlyHeroCards {
     grid-template-columns: repeat(2, minmax(280px, 349px));
   }
 
-  .plusMonthlyHeroCards.heroCardsSingle,
   .ultimateMonthlyHeroCards.heroCardsSingle {
     grid-template-columns: minmax(280px, 349px);
   }
