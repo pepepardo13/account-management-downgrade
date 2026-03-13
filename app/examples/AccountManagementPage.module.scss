@@ -165,15 +165,11 @@
 }
 
 .coreHeroCards .promoCard {
-  height: 424px;
-  max-height: 424px;
-  min-height: 424px;
+  height: 392px;
+  max-height: 392px;
+  min-height: 392px;
   gap: 16px;
   padding: 20px 20px 16px;
-}
-
-.coreHeroCards .cardSpacer {
-  display: none;
 }
 
 .coreHeroCards .cardActions {
@@ -271,7 +267,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-top: auto;
 }
 
 .cardActions :global(button) {
@@ -294,8 +289,8 @@
 }
 
 .cardSpacer {
-  flex: 1 1 auto;
-  min-height: 24px;
+  flex: 0 0 8px;
+  min-height: 8px;
 }
 
 .annualButton :global(button) {
@@ -495,8 +490,8 @@
 
   .heroCards:not(.heroCardsSingle) .promoCard {
     gap: 16px;
-    height: 424px;
-    min-height: 424px;
+    height: 392px;
+    min-height: 392px;
     padding: 20px 20px 16px;
   }
 
