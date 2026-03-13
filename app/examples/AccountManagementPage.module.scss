@@ -181,7 +181,7 @@
 }
 
 .coreMonthlyHeroCards .promoCard {
-  gap: 25px;
+  gap: 24px;
   height: 400px;
   max-height: 400px;
   min-height: 400px;
@@ -226,6 +226,14 @@
 
 .coreMonthlyHeroCards .cardCopy {
   max-width: 285px;
+}
+
+.coreMonthlyHeroCards .cardSpacer {
+  display: none;
+}
+
+.coreMonthlyHeroCards .cardActions {
+  gap: 16px;
 }
 
 .coreMonthlyHeroCards .promoCardBottomAlignedActions .cardCopy {
