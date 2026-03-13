@@ -28,6 +28,8 @@ type PlanFeature = {
 };
 
 type PromoAction = {
+  external?: boolean;
+  href?: string;
   label: string;
   outlined?: boolean;
   radius?: "4px" | "8px";
@@ -72,6 +74,33 @@ type Props = {
   variant?: AccountManagementVariant;
 };
 
+const publicSocialLinks: Array<{ href: string; icon: IconName; label: string }> = [
+  { href: "https://www.youtube.com/@Envato", icon: "youtube-outlined", label: "YouTube" },
+  { href: "https://www.tiktok.com/@envato", icon: "tik-tok", label: "TikTok" },
+  { href: "https://www.threads.net/@envato", icon: "threads", label: "Threads" },
+  { href: "https://www.facebook.com/envato", icon: "facebook-square", label: "Facebook" },
+  { href: "https://x.com/envato", icon: "twitter-x", label: "X" },
+  { href: "https://www.pinterest.com/envato/", icon: "pinterest-circle", label: "Pinterest" },
+  { href: "https://www.instagram.com/envato/", icon: "instagram", label: "Instagram" },
+];
+
+function withHash(url: string, hash: string) {
+  return `${url}#${hash}`;
+}
+
+function navigateToUrl(url: string, external?: boolean) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  if (external) {
+    window.open(url, "_blank", "noopener,noreferrer");
+    return;
+  }
+
+  window.location.assign(url);
+}
+
 function ActionItem({ action }: { action: ActionLink }) {
   return (
     <a
@@ -93,12 +122,15 @@ function PromoCardView({ card }: { card: PromoCard }) {
   const remainingGenerations = card.usage
     ? Math.max(Number(card.usage.total) - Number(card.usage.current), 0)
     : 0;
+  const hasSingleActionUsageLayout = Boolean(card.usage) && card.actions.length === 1;
 
   return (
     <article
       className={`${styles["promoCard"]} ${
         card.emphasized ? styles["promoCardPrimary"] : ""
-      } ${!card.usage ? styles["promoCardBottomAlignedActions"] : ""}`}
+      } ${!card.usage ? styles["promoCardBottomAlignedActions"] : ""} ${
+        hasSingleActionUsageLayout ? styles["promoCardSingleActionBottomAligned"] : ""
+      }`}
     >
       <h2 className={styles["cardTitle"]}>{card.title}</h2>
 
@@ -148,7 +180,18 @@ function PromoCardView({ card }: { card: PromoCard }) {
               .join(" ")}
             key={action.label}
           >
-            <Button size="large" variant={action.variant} width="full">
+            <Button
+              onClick={
+                action.href
+                  ? () => {
+                      navigateToUrl(action.href!, action.external);
+                    }
+                  : undefined
+              }
+              size="large"
+              variant={action.variant}
+              width="full"
+            >
               {action.label}
             </Button>
           </div>
@@ -161,14 +204,90 @@ function PromoCardView({ card }: { card: PromoCard }) {
 export function AccountManagementPage({ variant = "core-monthly" }: Props) {
   const externalUrls = useExternalUrls();
   const isCoreVariant = variant === "core-monthly" || variant === "core-annual";
+  const isCompactMonthlyVariant =
+    variant === "plus-monthly" || variant === "ultimate-monthly";
+  const usesRefinedPromoCards = !isCoreVariant && !isCompactMonthlyVariant;
+  const pricingUrl = new URL("/pricing", externalUrls.storefront).toString();
+  const forumsUrl = "https://forums.envato.com";
+  const cookiesUrl = `${externalUrls.privacyPolicy}#cookies`;
+  const cookieSettingsUrl = `${externalUrls.privacyPolicy}#cookie-settings`;
 
   const accountSettings: ActionLink[] = [
-    { href: "#", icon: "edit", label: "Edit profile" },
-    { href: "#", icon: "key", label: "Change password" },
     {
-      href: "#",
+      href: withHash(externalUrls.myAccount, "profile"),
+      icon: "edit",
+      label: "Edit profile",
+    },
+    {
+      href: withHash(externalUrls.myAccount, "password"),
+      icon: "key",
+      label: "Change password",
+    },
+    {
+      href: withHash(externalUrls.myAccount, "two-factor"),
       icon: "security-on",
       label: "Two-factor authentication (2FA)",
+    },
+  ];
+
+  const sharedManageSubscriptionLinks: ActionLink[] = [
+    {
+      href: `${pricingUrl}?plan=teams`,
+      icon: "group-add",
+      label: "Upgrade to Teams",
+    },
+    {
+      href: withHash(externalUrls.myAccount, "payment-method"),
+      icon: "credit-card",
+      label: "Payment method",
+    },
+    {
+      href: withHash(externalUrls.myAccount, "billing-information"),
+      icon: "receipt",
+      label: "Billing information",
+    },
+    {
+      href: withHash(externalUrls.myAccount, "payment-history"),
+      icon: "documents",
+      label: "Payment history",
+    },
+    {
+      href: withHash(externalUrls.myAccount, "cancel-subscription"),
+      icon: "clear",
+      label: "Cancel subscription",
+    },
+  ];
+
+  const ultimateManageSubscriptionLinks: ActionLink[] = [
+    {
+      href: `${pricingUrl}?plan=teams`,
+      icon: "group-add",
+      label: "Upgrade to Teams",
+    },
+    {
+      href: withHash(externalUrls.myAccount, "change-plan"),
+      icon: "swap-horizontal",
+      label: "Change my plan",
+    },
+    {
+      href: withHash(externalUrls.myAccount, "payment-method"),
+      icon: "credit-card",
+      label: "Payment method",
+    },
+    {
+      href: withHash(externalUrls.myAccount, "billing-information"),
+      icon: "receipt",
+      label: "Billing information",
+    },
+    {
+      href: withHash(externalUrls.myAccount, "payment-history"),
+      icon: "documents",
+      label: "Payment history",
+    },
+    {
+      href: withHash(externalUrls.myAccount, "cancel-subscription"),
+      icon: "clear",
+      label: "Cancel subscription",
     },
   ];
 
@@ -184,13 +303,18 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
         {
           title: "Elevate your plan!",
           body: "Upgrade to the Plus or Ultimate plan and unlock up to 100 or unlimited generations.",
-          ctaHref: "#upgrade-details",
+          ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
           usage: { current: "5", total: "10", resetDate: "14 April, 2026" },
           actions: [
-            { label: "Upgrade to Ultimate", variant: "primary" },
             {
+              href: `${pricingUrl}?plan=ultimate`,
+              label: "Upgrade to Ultimate",
+              variant: "primary",
+            },
+            {
+              href: `${pricingUrl}?plan=plus`,
               label: "Upgrade to Plus",
               outlined: true,
               radius: "4px",
@@ -203,6 +327,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
           body: "Save $198.00/year ($16.50/month) with an annual plan, same unlimited access, half the price.",
           actions: [
             {
+              href: withHash(externalUrls.myAccount, "switch-to-annual"),
               label: "Switch to annual",
               outlined: true,
               radius: "8px",
@@ -211,13 +336,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
           ],
         },
       ],
-      manageSubscription: [
-        { href: "#", icon: "group-add", label: "Upgrade to Teams" },
-        { href: "#", icon: "credit-card", label: "Payment method" },
-        { href: "#", icon: "receipt", label: "Billing information" },
-        { href: "#", icon: "documents", label: "Payment history" },
-        { href: "#", icon: "clear", label: "Cancel subscription" },
-      ],
+      manageSubscription: sharedManageSubscriptionLinks,
       copyright:
         "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
     },
@@ -232,13 +351,18 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
         {
           title: "Elevate your plan!",
           body: "Upgrade to the Plus or Ultimate plan and unlock up to 100 or unlimited generations.",
-          ctaHref: "#upgrade-details",
+          ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
           usage: { current: "5", total: "10", resetDate: "14 April, 2026" },
           actions: [
-            { label: "Upgrade to Ultimate", variant: "primary" },
             {
+              href: `${pricingUrl}?plan=ultimate`,
+              label: "Upgrade to Ultimate",
+              variant: "primary",
+            },
+            {
+              href: `${pricingUrl}?plan=plus`,
               label: "Upgrade to Plus",
               outlined: true,
               radius: "4px",
@@ -247,13 +371,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
           ],
         },
       ],
-      manageSubscription: [
-        { href: "#", icon: "group-add", label: "Upgrade to Teams" },
-        { href: "#", icon: "credit-card", label: "Payment method" },
-        { href: "#", icon: "receipt", label: "Billing information" },
-        { href: "#", icon: "documents", label: "Payment history" },
-        { href: "#", icon: "clear", label: "Cancel subscription" },
-      ],
+      manageSubscription: sharedManageSubscriptionLinks,
       copyright:
         "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
     },
@@ -268,17 +386,24 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
         {
           title: "Elevate your plan!",
           body: "Upgrade to the Plus or Ultimate plan and unlock up to 100 or unlimited generations.",
-          ctaHref: "#upgrade-details",
+          ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
           usage: { current: "50", total: "100", resetDate: "14 April, 2026" },
-          actions: [{ label: "Upgrade to Ultimate", variant: "primary" }],
+          actions: [
+            {
+              href: `${pricingUrl}?plan=ultimate`,
+              label: "Upgrade to Ultimate",
+              variant: "primary",
+            },
+          ],
         },
         {
           title: "Switch to annual payments and save 50%",
           body: "Save $198.00/year ($16.50/month) with an annual plan, same unlimited access, half the price.",
           actions: [
             {
+              href: withHash(externalUrls.myAccount, "switch-to-annual"),
               label: "Switch to annual",
               outlined: true,
               radius: "8px",
@@ -287,13 +412,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
           ],
         },
       ],
-      manageSubscription: [
-        { href: "#", icon: "group-add", label: "Upgrade to Teams" },
-        { href: "#", icon: "credit-card", label: "Payment method" },
-        { href: "#", icon: "receipt", label: "Billing information" },
-        { href: "#", icon: "documents", label: "Payment history" },
-        { href: "#", icon: "clear", label: "Cancel subscription" },
-      ],
+      manageSubscription: sharedManageSubscriptionLinks,
       copyright:
         "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
     },
@@ -308,20 +427,20 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
         {
           title: "Elevate your plan!",
           body: "Upgrade to the Plus or Ultimate plan and unlock up to 100 or unlimited generations.",
-          ctaHref: "#upgrade-details",
+          ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
           usage: { current: "50", total: "100", resetDate: "14 April, 2026" },
-          actions: [{ label: "Upgrade to Ultimate", variant: "primary" }],
+          actions: [
+            {
+              href: `${pricingUrl}?plan=ultimate`,
+              label: "Upgrade to Ultimate",
+              variant: "primary",
+            },
+          ],
         },
       ],
-      manageSubscription: [
-        { href: "#", icon: "group-add", label: "Upgrade to Teams" },
-        { href: "#", icon: "credit-card", label: "Payment method" },
-        { href: "#", icon: "receipt", label: "Billing information" },
-        { href: "#", icon: "documents", label: "Payment history" },
-        { href: "#", icon: "clear", label: "Cancel subscription" },
-      ],
+      manageSubscription: sharedManageSubscriptionLinks,
       copyright:
         "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
     },
@@ -338,6 +457,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
           body: "Save $198.00/year ($16.50/month) with an annual plan, same unlimited access, half the price.",
           actions: [
             {
+              href: withHash(externalUrls.myAccount, "switch-to-annual"),
               label: "Switch to annual",
               outlined: true,
               radius: "8px",
@@ -346,14 +466,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
           ],
         },
       ],
-      manageSubscription: [
-        { href: "#", icon: "group-add", label: "Upgrade to Teams" },
-        { href: "#", icon: "swap-horizontal", label: "Change my plan" },
-        { href: "#", icon: "credit-card", label: "Payment method" },
-        { href: "#", icon: "receipt", label: "Billing information" },
-        { href: "#", icon: "documents", label: "Payment history" },
-        { href: "#", icon: "clear", label: "Cancel subscription" },
-      ],
+      manageSubscription: ultimateManageSubscriptionLinks,
       copyright:
         "© 2026 Envato Trademarks and brands are the property of their respective owners.",
     },
@@ -365,14 +478,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentDays: 360,
       planFeature: { badge: "Unlimited" },
       promoCards: [],
-      manageSubscription: [
-        { href: "#", icon: "group-add", label: "Upgrade to Teams" },
-        { href: "#", icon: "swap-horizontal", label: "Change my plan" },
-        { href: "#", icon: "credit-card", label: "Payment method" },
-        { href: "#", icon: "receipt", label: "Billing information" },
-        { href: "#", icon: "documents", label: "Payment history" },
-        { href: "#", icon: "clear", label: "Cancel subscription" },
-      ],
+      manageSubscription: ultimateManageSubscriptionLinks,
       copyright:
         "© 2026 Envato Trademarks and brands are the property of their respective owners.",
     },
@@ -389,32 +495,22 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       label: "Help Center",
       external: true,
     },
-    { href: "#", icon: "comment-text", label: "Forums", external: true },
+    { href: forumsUrl, icon: "comment-text", label: "Forums", external: true },
   ];
 
   const footerLinks: FooterLink[] = [
     { href: externalUrls.storefront, label: "About Elements" },
-    { href: "#", label: "Plans & Pricing" },
+    { href: pricingUrl, label: "Plans & Pricing" },
     { href: externalUrls.licenseTerms, label: "License Terms" },
     { href: externalUrls.userTerms, label: "Terms & Conditions" },
     { href: externalUrls.privacyPolicy, label: "Privacy Policy" },
-    { href: "#", label: "Cookies" },
+    { href: cookiesUrl, label: "Cookies" },
     {
       href: externalUrls.personalInformation,
       label: "Do not share my personal information",
     },
     { href: externalUrls.helpCenterHome, label: "Help Center" },
-    { href: "#", label: "Cookie Settings" },
-  ];
-
-  const socialLinks: Array<{ href: string; icon: IconName; label: string }> = [
-    { href: "#", icon: "youtube-outlined", label: "YouTube" },
-    { href: "#", icon: "tik-tok", label: "TikTok" },
-    { href: "#", icon: "threads", label: "Threads" },
-    { href: "#", icon: "facebook-square", label: "Facebook" },
-    { href: "#", icon: "twitter-x", label: "X" },
-    { href: "#", icon: "pinterest-circle", label: "Pinterest" },
-    { href: "#", icon: "instagram", label: "Instagram" },
+    { href: cookieSettingsUrl, label: "Cookie Settings" },
   ];
 
   return (
@@ -441,11 +537,15 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
           <div
             className={`${styles["heroInner"]} ${
               isAnnualVariant ? styles["annualHeroInner"] : ""
+            } ${
+              isCompactMonthlyVariant ? styles["compactMonthlyHeroInner"] : ""
             }`}
           >
             <div
               className={`${styles["planSummary"]} ${
                 hasSingleAnnualHeroCard ? styles["annualPlanSummary"] : ""
+              } ${
+                isCompactMonthlyVariant ? styles["compactMonthlyPlanSummary"] : ""
               }`}
             >
               <p className={styles["eyebrow"]}>Current Plan</p>
@@ -485,9 +585,11 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
             {config.promoCards.length > 0 ? (
               <div
                 className={`${styles["heroCards"]} ${
-                  styles["refinedPromoCards"]
+                  usesRefinedPromoCards ? styles["refinedPromoCards"] : ""
                 } ${
                   isCoreVariant ? styles["coreHeroCards"] : ""
+                } ${
+                  isCompactMonthlyVariant ? styles["compactMonthlyHeroCards"] : ""
                 } ${
                   config.promoCards.length === 1 ? styles["heroCardsSingle"] : ""
                 }`}
@@ -544,7 +646,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
 
             <div className={styles["footerMeta"]}>
               <div className={styles["socialLinks"]}>
-                {socialLinks.map((link) => (
+                {publicSocialLinks.map((link) => (
                   <a aria-label={link.label} href={link.href} key={link.label}>
                     <Icon name={link.icon} size="1x" />
                   </a>
