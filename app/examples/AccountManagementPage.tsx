@@ -161,7 +161,6 @@ function PromoCardView({ card }: { card: PromoCard }) {
 export function AccountManagementPage({ variant = "core-monthly" }: Props) {
   const externalUrls = useExternalUrls();
   const isCoreVariant = variant === "core-monthly" || variant === "core-annual";
-  const isCoreMonthlyVariant = variant === "core-monthly";
 
   const accountSettings: ActionLink[] = [
     { href: "#", icon: "edit", label: "Edit profile" },
@@ -486,9 +485,9 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
             {config.promoCards.length > 0 ? (
               <div
                 className={`${styles["heroCards"]} ${
-                  isCoreVariant ? styles["coreHeroCards"] : ""
+                  styles["refinedPromoCards"]
                 } ${
-                  isCoreMonthlyVariant ? styles["coreMonthlyHeroCards"] : ""
+                  isCoreVariant ? styles["coreHeroCards"] : ""
                 } ${
                   config.promoCards.length === 1 ? styles["heroCardsSingle"] : ""
                 }`}

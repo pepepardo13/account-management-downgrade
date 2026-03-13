@@ -176,11 +176,11 @@
   gap: 12px;
 }
 
-.coreMonthlyHeroCards {
+.refinedPromoCards {
   grid-template-columns: repeat(2, 349px);
 }
 
-.coreMonthlyHeroCards .promoCard {
+.refinedPromoCards .promoCard {
   gap: 24px;
   height: 416px;
   max-height: 416px;
@@ -188,66 +188,66 @@
   padding: 24px 32px;
 }
 
-.coreMonthlyHeroCards .promoCardPrimary {
+.refinedPromoCards .promoCardPrimary {
   border-width: 2px;
 }
 
-.coreMonthlyHeroCards .promoCard:not(.promoCardPrimary) {
+.refinedPromoCards .promoCard:not(.promoCardPrimary) {
   border-color: #8c8c8c;
 }
 
-.coreMonthlyHeroCards .cardTitle {
+.refinedPromoCards .cardTitle {
   font-size: 24px;
 }
 
-.coreMonthlyHeroCards .usageMeter {
+.refinedPromoCards .usageMeter {
   gap: 8px;
   width: 285px;
 }
 
-.coreMonthlyHeroCards .usageMeta {
+.refinedPromoCards .usageMeta {
   font-size: 14px;
   letter-spacing: 0.28px;
 }
 
-.coreMonthlyHeroCards .usageMeta strong {
+.refinedPromoCards .usageMeta strong {
   font-size: 14px;
 }
 
-.coreMonthlyHeroCards .progressTrack,
-.coreMonthlyHeroCards .usageDetails {
+.refinedPromoCards .progressTrack,
+.refinedPromoCards .usageDetails {
   width: 285px;
 }
 
-.coreMonthlyHeroCards .usageDetailRow {
+.refinedPromoCards .usageDetailRow {
   font-size: 12px;
   letter-spacing: 0.24px;
 }
 
-.coreMonthlyHeroCards .cardCopy {
+.refinedPromoCards .cardCopy {
   max-width: 285px;
 }
 
-.coreMonthlyHeroCards .cardSpacer {
+.refinedPromoCards .cardSpacer {
   display: none;
 }
 
-.coreMonthlyHeroCards .cardActions {
+.refinedPromoCards .cardActions {
   gap: 16px;
 }
 
-.coreMonthlyHeroCards .promoCardBottomAlignedActions .cardCopy {
+.refinedPromoCards .promoCardBottomAlignedActions .cardCopy {
   font-size: 16px;
   max-width: 285px;
 }
 
-.coreMonthlyHeroCards .promoCardBottomAlignedActions .cardActions {
+.refinedPromoCards .promoCardBottomAlignedActions .cardActions {
   margin-top: auto;
   width: 100%;
 }
 
-.coreMonthlyHeroCards .promoCardBottomAlignedActions .outlinedButton,
-.coreMonthlyHeroCards .promoCardBottomAlignedActions .outlinedButton :global(button) {
+.refinedPromoCards .promoCardBottomAlignedActions .outlinedButton,
+.refinedPromoCards .promoCardBottomAlignedActions .outlinedButton :global(button) {
   width: 100%;
 }
 
