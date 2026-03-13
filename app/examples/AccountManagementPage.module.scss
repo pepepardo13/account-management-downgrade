@@ -193,7 +193,11 @@
 }
 
 .promoCardBottomAlignedActions .cardSpacer {
-  flex: 1 0 8px;
+  display: none;
+}
+
+.promoCardBottomAlignedActions .cardActions {
+  margin-top: auto;
 }
 
 .cardTitle {
