@@ -611,6 +611,14 @@
   position: relative;
 }
 
+.collapsibleHeroCardsCollapsed.plusMonthlyHeroCards .promoCard,
+.collapsibleHeroCardsCollapsed.plusAnnualHeroCards .promoCard,
+.collapsibleHeroCardsCollapsed.coreAnnualHeroCards .promoCard {
+  height: auto;
+  max-height: none;
+  min-height: 0;
+}
+
 .promoCard {
   background: var(--panel-background);
   border: 1px solid var(--border-muted);
@@ -994,6 +1002,12 @@
     max-height: none;
     min-height: 349px;
     padding: 24px;
+  }
+
+  .collapsibleHeroCardsCollapsed.plusMonthlyHeroCards .promoCard,
+  .collapsibleHeroCardsCollapsed.plusAnnualHeroCards .promoCard,
+  .collapsibleHeroCardsCollapsed.coreAnnualHeroCards .promoCard {
+    min-height: 0;
   }
 
   .footerMeta {
