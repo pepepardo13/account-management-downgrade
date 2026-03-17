@@ -20,6 +20,7 @@ type Props = {
   onChangeToCore?: () => void;
   onChangeToPlus?: () => void;
   onKeepSubscription?: () => void;
+  planType?: "core" | "plus" | "ultimate";
   showAnnualSwitchBanner?: boolean;
 };
 
@@ -81,6 +82,7 @@ export function CancelSubscriptionPage({
   onChangeToCore,
   onChangeToPlus,
   onKeepSubscription,
+  planType = "ultimate",
   showAnnualSwitchBanner = false,
 }: Props) {
   const externalUrls = useExternalUrls();
@@ -91,6 +93,7 @@ export function CancelSubscriptionPage({
 
   const pricingUrl = new URL("/pricing", externalUrls.storefront).toString();
   const switchToAnnualUrl = `${externalUrls.myAccount}#switch-to-annual`;
+  const changeToUltimateUrl = `${pricingUrl}?plan=ultimate`;
   const footerLinks = [
     { href: externalUrls.storefront, label: "About Elements" },
     { href: pricingUrl, label: "Plans & Pricing" },
@@ -105,6 +108,38 @@ export function CancelSubscriptionPage({
     { href: externalUrls.helpCenterHome, label: "Help Center" },
     { href: `${externalUrls.privacyPolicy}#cookie-settings`, label: "Cookie Settings" },
   ];
+
+  const primaryPromoAction =
+    planType === "core"
+      ? {
+          label: "Change to Ultimate",
+          onActivate: () => window.location.assign(changeToUltimateUrl),
+        }
+      : planType === "plus"
+        ? {
+            label: "Change to Core",
+            onActivate: () => onChangeToCore?.(),
+          }
+        : {
+            label: "Change to Plus",
+            onActivate: () => onChangeToPlus?.(),
+          };
+
+  const secondaryPromoAction =
+    planType === "core"
+      ? {
+          label: "Change to Plus",
+          onActivate: () => onChangeToPlus?.(),
+        }
+      : planType === "plus"
+        ? {
+            label: "Change to Ultimate",
+            onActivate: () => window.location.assign(changeToUltimateUrl),
+          }
+        : {
+            label: "Change to Core",
+            onActivate: () => onChangeToCore?.(),
+          };
 
   return (
     <div className={styles["page"]}>
@@ -162,42 +197,42 @@ export function CancelSubscriptionPage({
                   <div className={styles["promoActions"]}>
                     <div
                       className={`${styles["promoActionButton"]} ${styles["promoPrimaryButton"]}`}
-                      onClick={onChangeToPlus}
+                      onClick={primaryPromoAction.onActivate}
                       onKeyDown={(event) => {
                         if (event.key === "Enter" || event.key === " ") {
                           event.preventDefault();
-                          onChangeToPlus?.();
+                          primaryPromoAction.onActivate();
                         }
                       }}
                       role="button"
                       tabIndex={0}
                     >
                       <Button
-                        onClick={onChangeToPlus}
+                        onClick={primaryPromoAction.onActivate}
                         size="medium"
                         variant="primary"
                       >
-                        Change to Plus
+                        {primaryPromoAction.label}
                       </Button>
                     </div>
                     <div
                       className={`${styles["promoActionButton"]} ${styles["promoOutlineButton"]}`}
-                      onClick={onChangeToCore}
+                      onClick={secondaryPromoAction.onActivate}
                       onKeyDown={(event) => {
                         if (event.key === "Enter" || event.key === " ") {
                           event.preventDefault();
-                          onChangeToCore?.();
+                          secondaryPromoAction.onActivate();
                         }
                       }}
                       role="button"
                       tabIndex={0}
                     >
                       <Button
-                        onClick={onChangeToCore}
+                        onClick={secondaryPromoAction.onActivate}
                         size="medium"
                         variant="tertiary"
                       >
-                        Change to Core
+                        {secondaryPromoAction.label}
                       </Button>
                     </div>
                   </div>

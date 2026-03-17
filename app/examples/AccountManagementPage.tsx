@@ -451,6 +451,12 @@ export function AccountManagementPage({
     isPlusAnnualV2Variant ||
     isUltimateMonthlyV2Variant ||
     isUltimateAnnualV2Variant;
+  const cancelPagePlanType =
+    isCoreMonthlyFamilyVariant || isCoreAnnualFamilyVariant
+      ? "core"
+      : isPlusMonthlyFamilyVariant || isPlusAnnualFamilyVariant
+        ? "plus"
+        : "ultimate";
 
   const accountSettings: ActionLink[] = [
     {
@@ -1151,6 +1157,7 @@ export function AccountManagementPage({
           onChangeToCore={() => setScreen("change-to-core")}
           onChangeToPlus={() => setScreen("change-to-plus")}
           onKeepSubscription={() => setScreen("overview")}
+          planType={cancelPagePlanType}
           showAnnualSwitchBanner={
             isUltimateMonthlyV2Variant || isPlusMonthlyV2Variant || isCoreMonthlyV2Variant
           }
