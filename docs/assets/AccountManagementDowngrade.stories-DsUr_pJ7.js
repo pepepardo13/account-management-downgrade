@@ -1,12 +1,12 @@
-import{A as c}from"./AccountManagementPage-DTNVLgrK.js";import"./iframe-DmxPtFXH.js";import"./preload-helper-PPVm8Dsz.js";import"./envato-CVNckHu4.js";import"./Button-BxGpx2sJ.js";import"./Bleed-BS7gCg24.js";const A={title:"Layout / Account Management Downgrade",component:c,parameters:{layout:"fullscreen"},globals:{colorScheme:"light"}},a={name:"Core Monthly - Downgrade",args:{variant:"core-monthly"}},n={name:"Plus Monthly - Downgrade",args:{variant:"plus-monthly"}},r={name:"Core Monthly Alt - Downgrade",args:{variant:"core-monthly-alt"}},e={name:"Core Annual - Downgrade",args:{variant:"core-annual"}},o={name:"Core Annual Alt - Downgrade",args:{variant:"core-annual-alt"}},t={name:"Plus Annual - Downgrade",args:{variant:"plus-annual"}},s={name:"Plus Monthly Alt - Downgrade",args:{variant:"plus-monthly-alt"}},l={name:"Plus Annual Alt - Downgrade",args:{variant:"plus-annual-alt"}},m={name:"Ultimate Monthly - Downgrade",args:{variant:"ultimate-monthly-v2"}},u={name:"Ultimate Annual - Downgrade",args:{variant:"ultimate-annual-v2"}};a.parameters={...a.parameters,docs:{...a.parameters?.docs,source:{originalSource:`{
+import{A as c}from"./AccountManagementPage-CP-zNbQJ.js";import"./iframe-BRQyCpye.js";import"./preload-helper-PPVm8Dsz.js";import"./envato-drarS5aO.js";import"./Button-DjuBBlub.js";import"./Bleed-AnFGf_HX.js";const A={title:"Layout / Account Management Downgrade",component:c,parameters:{layout:"fullscreen"},globals:{colorScheme:"light"}},a={name:"Core Monthly - Downgrade",args:{variant:"core-monthly-v2"}},n={name:"Plus Monthly - Downgrade",args:{variant:"plus-monthly-v2"}},r={name:"Core Monthly Alt - Downgrade",args:{variant:"core-monthly-alt"}},e={name:"Core Annual - Downgrade",args:{variant:"core-annual-v2"}},o={name:"Core Annual Alt - Downgrade",args:{variant:"core-annual-alt"}},t={name:"Plus Annual - Downgrade",args:{variant:"plus-annual-v2"}},s={name:"Plus Monthly Alt - Downgrade",args:{variant:"plus-monthly-alt"}},l={name:"Plus Annual Alt - Downgrade",args:{variant:"plus-annual-alt"}},m={name:"Ultimate Monthly - Downgrade",args:{variant:"ultimate-monthly-v2"}},u={name:"Ultimate Annual - Downgrade",args:{variant:"ultimate-annual-v2"}};a.parameters={...a.parameters,docs:{...a.parameters?.docs,source:{originalSource:`{
   name: "Core Monthly - Downgrade",
   args: {
-    variant: "core-monthly"
+    variant: "core-monthly-v2"
   }
 }`,...a.parameters?.docs?.source}}};n.parameters={...n.parameters,docs:{...n.parameters?.docs,source:{originalSource:`{
   name: "Plus Monthly - Downgrade",
   args: {
-    variant: "plus-monthly"
+    variant: "plus-monthly-v2"
   }
 }`,...n.parameters?.docs?.source}}};r.parameters={...r.parameters,docs:{...r.parameters?.docs,source:{originalSource:`{
   name: "Core Monthly Alt - Downgrade",
@@ -16,7 +16,7 @@ import{A as c}from"./AccountManagementPage-DTNVLgrK.js";import"./iframe-DmxPtFXH
 }`,...r.parameters?.docs?.source}}};e.parameters={...e.parameters,docs:{...e.parameters?.docs,source:{originalSource:`{
   name: "Core Annual - Downgrade",
   args: {
-    variant: "core-annual"
+    variant: "core-annual-v2"
   }
 }`,...e.parameters?.docs?.source}}};o.parameters={...o.parameters,docs:{...o.parameters?.docs,source:{originalSource:`{
   name: "Core Annual Alt - Downgrade",
@@ -26,7 +26,7 @@ import{A as c}from"./AccountManagementPage-DTNVLgrK.js";import"./iframe-DmxPtFXH
 }`,...o.parameters?.docs?.source}}};t.parameters={...t.parameters,docs:{...t.parameters?.docs,source:{originalSource:`{
   name: "Plus Annual - Downgrade",
   args: {
-    variant: "plus-annual"
+    variant: "plus-annual-v2"
   }
 }`,...t.parameters?.docs?.source}}};s.parameters={...s.parameters,docs:{...s.parameters?.docs,source:{originalSource:`{
   name: "Plus Monthly Alt - Downgrade",

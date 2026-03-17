@@ -19,14 +19,14 @@ type Story = StoryObj<typeof meta>;
 export const CoreMonthlyDowngrade: Story = {
   name: "Core Monthly - Downgrade",
   args: {
-    variant: "core-monthly",
+    variant: "core-monthly-v2",
   },
 };
 
 export const PlusMonthlyDowngrade: Story = {
   name: "Plus Monthly - Downgrade",
   args: {
-    variant: "plus-monthly",
+    variant: "plus-monthly-v2",
   },
 };
 
@@ -40,7 +40,7 @@ export const CoreMonthlyAltDowngrade: Story = {
 export const CoreAnnualDowngrade: Story = {
   name: "Core Annual - Downgrade",
   args: {
-    variant: "core-annual",
+    variant: "core-annual-v2",
   },
 };
 
@@ -54,7 +54,7 @@ export const CoreAnnualAltDowngrade: Story = {
 export const PlusAnnualDowngrade: Story = {
   name: "Plus Annual - Downgrade",
   args: {
-    variant: "plus-annual",
+    variant: "plus-annual-v2",
   },
 };
 
