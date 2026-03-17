@@ -2,7 +2,7 @@ import { readdir, readFile, writeFile } from "node:fs/promises";
 
 const iframePath = new URL("../docs/iframe.html", import.meta.url);
 const assetsPath = new URL("../docs/assets/", import.meta.url);
-const repoBasePath = "/account-management-prototypes";
+const repoBasePath = "/account-management-downgrade";
 const wrongPath = 'src="/vite-inject-mocker-entry.js"';
 const correctPath = `src="${repoBasePath}/vite-inject-mocker-entry.js"`;
 
