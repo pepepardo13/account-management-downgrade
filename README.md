@@ -1,4 +1,4 @@
-# Design Playground
+# Account Management Downgrade
 
 A Storybook starter kit for scaffolding UI pages with the Envato Design System. Open this repo in Cursor and use the included layout examples as starting points — describe the page you want to Cursor and it will scaffold a new story for you.
 

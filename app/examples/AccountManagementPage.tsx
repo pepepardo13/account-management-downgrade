@@ -1,21 +1,37 @@
 import type { iconNames } from "@envato/design-system/components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Bleed, Button, Icon } from "@envato/design-system/components";
 
 import { useExternalUrls } from "../contexts/ExternalUrlsContext.tsx";
 
 import envatoHref from "../components/Navigation/HomeLink/envato.svg";
+import { CancelSubscriptionPage } from "./CancelSubscriptionPage.tsx";
+import { ChangeToCorePage } from "./ChangeToCorePage.tsx";
+import { ChangeToPlusPage } from "./ChangeToPlusPage.tsx";
+import { PlanChangeCancellationModal } from "./PlanChangeCancellationModal.tsx";
 
 import styles from "./AccountManagementPage.module.scss";
+
+const figmaCheckmarkCircleOutlinedHref =
+  "https://www.figma.com/api/mcp/asset/0cb4fe90-a493-4fd5-ad84-e95a19c5e003";
+const figmaAiLabsHref =
+  "https://www.figma.com/api/mcp/asset/eb23c786-deb1-4f12-91ee-1497e57e5f26";
+const figmaInfoHref =
+  "https://www.figma.com/api/mcp/asset/5b96f02b-0d9e-4791-8f77-f3d7cd96e0d3";
+const standardSupportingPoints = [
+  "Unlimited downloads of 27+ million of creative assets",
+  "Lifetime commercial license for all creative assets and AI generations",
+];
 
 type IconName = (typeof iconNames)[number];
 
 type ActionLink = {
-  href: string;
+  href?: string;
   icon: IconName;
   label: string;
   external?: boolean;
+  onClick?: () => void;
 };
 
 type FooterLink = {
@@ -26,6 +42,7 @@ type FooterLink = {
 type PlanFeature = {
   badge?: string;
   count?: string;
+  supportingPoints?: string[];
 };
 
 type PromoAction = {
@@ -73,11 +90,21 @@ export type AccountManagementVariant =
   | "plus-annual"
   | "plus-annual-alt"
   | "ultimate-monthly"
-  | "ultimate-annual";
+  | "ultimate-monthly-v2"
+  | "ultimate-annual"
+  | "ultimate-annual-v2";
 
 type Props = {
   variant?: AccountManagementVariant;
+  initialScreen?:
+    | "overview"
+    | "cancel-subscription"
+    | "change-to-plus"
+    | "change-to-core";
 };
+
+type PendingPlanChange = "plus" | "core" | null;
+type CancelChangeModalStep = "confirm" | "success" | null;
 
 const publicSocialLinks: Array<{ href: string; icon: IconName; label: string }> = [
   { href: "https://www.youtube.com/@Envato", icon: "youtube-outlined", label: "YouTube" },
@@ -106,7 +133,30 @@ function navigateToUrl(url: string, external?: boolean) {
   window.location.assign(url);
 }
 
+function scrollToTop() {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  window.scrollTo({ top: 0, behavior: "auto" });
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+  window.parent?.scrollTo?.({ top: 0, behavior: "auto" });
+}
+
 function ActionItem({ action }: { action: ActionLink }) {
+  if (action.onClick) {
+    return (
+      <button className={`${styles["actionItem"]} ${styles["actionItemButton"]}`} onClick={action.onClick} type="button">
+        <span className={styles["actionItemContent"]}>
+          <Icon name={action.icon} size="1x" />
+          <span>{action.label}</span>
+        </span>
+        <Icon name="chevron-right" size="1x" />
+      </button>
+    );
+  }
+
   return (
     <a
       className={styles["actionItem"]}
@@ -232,9 +282,19 @@ function PromoCardView({
   );
 }
 
-export function AccountManagementPage({ variant = "core-monthly" }: Props) {
+export function AccountManagementPage({
+  variant = "core-monthly",
+  initialScreen = "overview",
+}: Props) {
   const externalUrls = useExternalUrls();
   const [isAltUsageExpanded, setIsAltUsageExpanded] = useState(false);
+  const [pendingPlanChange, setPendingPlanChange] =
+    useState<PendingPlanChange>(null);
+  const [cancelChangeModalStep, setCancelChangeModalStep] =
+    useState<CancelChangeModalStep>(null);
+  const [screen, setScreen] = useState<
+    "overview" | "cancel-subscription" | "change-to-plus" | "change-to-core"
+  >(initialScreen);
   const isCoreMonthlyVariant = variant === "core-monthly";
   const isCoreMonthlyAltVariant = variant === "core-monthly-alt";
   const isCoreMonthlyFamilyVariant = isCoreMonthlyVariant || isCoreMonthlyAltVariant;
@@ -248,7 +308,11 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
   const isPlusAnnualAltVariant = variant === "plus-annual-alt";
   const isPlusAnnualFamilyVariant = isPlusAnnualVariant || isPlusAnnualAltVariant;
   const isUltimateMonthlyVariant = variant === "ultimate-monthly";
+  const isUltimateMonthlyV2Variant = variant === "ultimate-monthly-v2";
+  const isUltimateMonthlyFamilyVariant = isUltimateMonthlyVariant || isUltimateMonthlyV2Variant;
   const isUltimateAnnualVariant = variant === "ultimate-annual";
+  const isUltimateAnnualV2Variant = variant === "ultimate-annual-v2";
+  const isRefreshedV2Variant = isUltimateMonthlyV2Variant || isUltimateAnnualV2Variant;
   const isAltVariant =
     isCoreMonthlyAltVariant || isCoreAnnualAltVariant || isPlusMonthlyAltVariant || isPlusAnnualAltVariant;
   const pricingUrl = new URL("/pricing", externalUrls.storefront).toString();
@@ -329,9 +393,16 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       label: "Payment history",
     },
     {
-      href: withHash(externalUrls.myAccount, "cancel-subscription"),
       icon: "clear",
       label: "Cancel subscription",
+      onClick:
+        isUltimateMonthlyV2Variant || isUltimateAnnualVariant || isUltimateAnnualV2Variant
+          ? () => setScreen("cancel-subscription")
+          : undefined,
+      href:
+        isUltimateMonthlyV2Variant || isUltimateAnnualVariant || isUltimateAnnualV2Variant
+          ? undefined
+          : withHash(externalUrls.myAccount, "cancel-subscription"),
     },
   ];
 
@@ -666,6 +737,35 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       copyright:
         "© 2026 Envato Trademarks and brands are the property of their respective owners.",
     },
+    "ultimate-monthly-v2": {
+      title: "Ultimate Individual Subscription",
+      renewalCadence: "monthly",
+      nextPaymentAmount: "USD $33.00",
+      nextPaymentDate: "Jan 07, 2027",
+      nextPaymentDays: 360,
+      planFeature: {
+        badge: "Unlimited",
+        supportingPoints: standardSupportingPoints,
+      },
+      promoCards: [
+        {
+          title: "Switch to annual payments and save 50%",
+          body: "Save $198.00/year ($16.50/month) with an annual plan, same unlimited access, half the price.",
+          actions: [
+            {
+              href: withHash(externalUrls.myAccount, "switch-to-annual"),
+              label: "Switch to annual",
+              outlined: true,
+              radius: "8px",
+              variant: "secondary",
+            },
+          ],
+        },
+      ],
+      manageSubscription: ultimateManageSubscriptionLinks,
+      copyright:
+        "© 2026 Envato Trademarks and brands are the property of their respective owners.",
+    },
     "ultimate-annual": {
       title: "Ultimate Individual Subscription",
       renewalCadence: "annually",
@@ -678,11 +778,52 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       copyright:
         "© 2026 Envato Trademarks and brands are the property of their respective owners.",
     },
+    "ultimate-annual-v2": {
+      title: "Ultimate Individual Subscription",
+      renewalCadence: "annually",
+      nextPaymentAmount: "USD $00.00",
+      nextPaymentDate: "Nov 27, 2025",
+      nextPaymentDays: 360,
+      planFeature: {
+        badge: "Unlimited",
+        supportingPoints: standardSupportingPoints,
+      },
+      promoCards: [],
+      manageSubscription: ultimateManageSubscriptionLinks,
+      copyright:
+        "© 2026 Envato Trademarks and brands are the property of their respective owners.",
+    },
   };
 
   const config = configs[variant];
   const isAnnualVariant = config.renewalCadence === "annually";
   const hasSingleAnnualHeroCard = isAnnualVariant && config.promoCards.length === 1;
+  const pendingPlanLabel =
+    pendingPlanChange === "plus"
+      ? "Plus Individual"
+      : pendingPlanChange === "core"
+        ? "Core Individual"
+        : null;
+
+  function completeCancelledPlanChange() {
+    setCancelChangeModalStep(null);
+    setPendingPlanChange(null);
+    scrollToTop();
+    requestAnimationFrame(() => {
+      scrollToTop();
+    });
+  }
+
+  useEffect(() => {
+    if (screen !== "overview" || !pendingPlanChange) {
+      return;
+    }
+
+    scrollToTop();
+    requestAnimationFrame(() => {
+      scrollToTop();
+    });
+  }, [pendingPlanChange, screen]);
 
   const supportLinks: ActionLink[] = [
     {
@@ -709,6 +850,50 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
     { href: cookieSettingsUrl, label: "Cookie Settings" },
   ];
 
+  if (screen === "cancel-subscription") {
+    return (
+      <Bleed uniform="3x">
+        <CancelSubscriptionPage
+          onBack={() => setScreen("overview")}
+          onChangeToCore={() => setScreen("change-to-core")}
+          onChangeToPlus={() => setScreen("change-to-plus")}
+          onKeepSubscription={() => setScreen("overview")}
+          showAnnualSwitchBanner={isUltimateMonthlyV2Variant}
+        />
+      </Bleed>
+    );
+  }
+
+  if (screen === "change-to-core") {
+    return (
+      <Bleed uniform="3x">
+        <ChangeToCorePage
+          onBack={() => setScreen("cancel-subscription")}
+          onCancel={() => setScreen("cancel-subscription")}
+          onConfirm={() => {
+            setPendingPlanChange("core");
+            setScreen("overview");
+          }}
+        />
+      </Bleed>
+    );
+  }
+
+  if (screen === "change-to-plus") {
+    return (
+      <Bleed uniform="3x">
+        <ChangeToPlusPage
+          onBack={() => setScreen("cancel-subscription")}
+          onCancel={() => setScreen("cancel-subscription")}
+          onConfirm={() => {
+            setPendingPlanChange("plus");
+            setScreen("overview");
+          }}
+        />
+      </Bleed>
+    );
+  }
+
   return (
     <Bleed uniform="3x">
       <div className={styles["page"]}>
@@ -734,18 +919,22 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
             className={`${styles["heroInner"]} ${
               isAnnualVariant ? styles["annualHeroInner"] : ""
             } ${
+              isRefreshedV2Variant ? styles["refreshedV2HeroInner"] : ""
+            } ${
               isPlusMonthlyFamilyVariant ? styles["plusMonthlyHeroInner"] : ""
             } ${
-              isUltimateMonthlyVariant ? styles["ultimateMonthlyHeroInner"] : ""
+              isUltimateMonthlyFamilyVariant ? styles["ultimateMonthlyHeroInner"] : ""
             }`}
           >
             <div
               className={`${styles["planSummary"]} ${
                 hasSingleAnnualHeroCard ? styles["annualPlanSummary"] : ""
               } ${
+                isRefreshedV2Variant ? styles["refreshedV2PlanSummary"] : ""
+              } ${
                 isPlusMonthlyFamilyVariant ? styles["plusMonthlyPlanSummary"] : ""
               } ${
-                isUltimateMonthlyVariant ? styles["ultimateMonthlyPlanSummary"] : ""
+                isUltimateMonthlyFamilyVariant ? styles["ultimateMonthlyPlanSummary"] : ""
               }`}
             >
               <p className={styles["eyebrow"]}>Current Plan</p>
@@ -759,7 +948,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                 {" "}Your next payment of <strong>{config.nextPaymentAmount}</strong>
                 {" "}(excluding tax and discounts) is scheduled for{" "}
                 <strong>{config.nextPaymentDate}</strong>
-                {isAnnualVariant ? (
+                {isAnnualVariant || isRefreshedV2Variant ? (
                   <> {"\u2014"} in {config.nextPaymentDays} days.</>
                 ) : (
                   <> in {config.nextPaymentDays} days.</>
@@ -767,7 +956,9 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
               </p>
 
               <div className={styles["planFeature"]}>
-                <Icon name="ai-labs" size="1x" />
+                <span className={styles["planFeatureIcon"]}>
+                  <img alt="" src={figmaAiLabsHref} />
+                </span>
                 <div className={styles["planFeatureText"]}>
                   <span>Includes</span>
                   {config.planFeature.badge ? (
@@ -780,6 +971,51 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                   <span>AI generations</span>
                 </div>
               </div>
+
+              {config.planFeature.supportingPoints?.length ? (
+                <div className={styles["planFeatureSupportingPoints"]}>
+                  {config.planFeature.supportingPoints.map((point) => (
+                    <div className={styles["planFeatureSupportingPoint"]} key={point}>
+                      <span className={styles["planFeatureIcon"]}>
+                        <img alt="" src={figmaCheckmarkCircleOutlinedHref} />
+                      </span>
+                      <span>{point}</span>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+
+              {pendingPlanLabel ? (
+                <>
+                  <div className={styles["pendingChangeMessage"]}>
+                    <div className={styles["pendingChangeIcon"]}>
+                      <img alt="" src={figmaInfoHref} />
+                    </div>
+                    <div className={styles["pendingChangeText"]}>
+                      <p>
+                        <strong>
+                          Your plan will change to {pendingPlanLabel} on March
+                          30, 2026.
+                        </strong>
+                      </p>
+                      <p>
+                        At your next renewal date. The updated price will apply
+                        starting with that billing cycle.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className={styles["pendingChangeButton"]}>
+                    <Button
+                      onClick={() => setCancelChangeModalStep("confirm")}
+                      size="large"
+                      variant="primary"
+                    >
+                      Cancel change request
+                    </Button>
+                  </div>
+                </>
+              ) : null}
             </div>
 
             {config.promoCards.length > 0 ? (
@@ -793,6 +1029,8 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                 } ${
                   isCoreAnnualFamilyVariant ? styles["coreAnnualHeroCards"] : ""
                 } ${
+                  isRefreshedV2Variant ? styles["refreshedV2HeroCards"] : ""
+                } ${
                   isAltVariant ? styles["collapsibleHeroCards"] : ""
                 } ${
                   isAltVariant && !isAltUsageExpanded
@@ -801,7 +1039,9 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                 } ${
                   isPlusMonthlyFamilyVariant ? styles["plusMonthlyHeroCards"] : ""
                 } ${
-                  isUltimateMonthlyVariant ? styles["ultimateMonthlyHeroCards"] : ""
+                  isUltimateMonthlyFamilyVariant ? styles["ultimateMonthlyHeroCards"] : ""
+                } ${
+                  isUltimateMonthlyV2Variant ? styles["ultimateMonthlyV2HeroCards"] : ""
                 } ${
                   config.promoCards.length === 1 ? styles["heroCardsSingle"] : ""
                 }`}
@@ -885,6 +1125,22 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
             <p className={styles["copyright"]}>{config.copyright}</p>
           </div>
         </footer>
+
+        <PlanChangeCancellationModal
+          chargeAmount={config.nextPaymentAmount}
+          isOpen={cancelChangeModalStep !== null}
+          onConfirmCancel={() => setCancelChangeModalStep("success")}
+          onDismiss={() => {
+            if (cancelChangeModalStep === "success") {
+              completeCancelledPlanChange();
+              return;
+            }
+
+            setCancelChangeModalStep(null);
+          }}
+          onDone={completeCancelledPlanChange}
+          step={cancelChangeModalStep}
+        />
       </div>
     </Bleed>
   );

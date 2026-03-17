@@ -1,0 +1,970 @@
+.page {
+  background: #ffffff;
+  color: #191919;
+  display: flex;
+  flex-direction: column;
+  font-family: "PolySans", sans-serif;
+  min-height: 100vh;
+}
+
+.topBar {
+  background: #191919;
+}
+
+.topBarInner {
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1440px;
+  min-height: 56px;
+  padding: 8px 32px;
+}
+
+.logoLink {
+  align-items: center;
+  display: inline-flex;
+}
+
+.logoLink img {
+  display: block;
+  height: 24px;
+  width: auto;
+}
+
+.profileButton {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: #cccccc;
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  gap: 4px;
+  padding: 0;
+}
+
+.main {
+  flex: 1 0 auto;
+  padding: 16px 0 40px;
+}
+
+.content {
+  margin: 0 auto;
+  width: 700px;
+}
+
+.backButton {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  height: 48px;
+  justify-content: center;
+  margin-bottom: 32px;
+  padding: 0;
+  width: 48px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.pageTitle {
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1;
+  margin: 0;
+}
+
+.infoBanner {
+  align-items: flex-start;
+  background: #f0f1ff;
+  border: 1px solid #4f5ce8;
+  border-radius: 4px;
+  display: flex;
+  gap: 8px;
+  padding: 16px;
+}
+
+.infoIcon {
+  align-items: flex-start;
+  align-self: flex-start;
+  color: #4f5ce8;
+  display: inline-flex;
+  flex: 0 0 auto;
+  padding-top: 2px;
+}
+
+.infoIcon img {
+  display: block;
+  height: 24px;
+  width: 24px;
+}
+
+.infoText {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.promoSection {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.promoCard {
+  align-items: stretch;
+  background: #fff5ed;
+  border-radius: 4px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 350px;
+  min-height: 248px;
+  overflow: hidden;
+}
+
+.promoContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  padding: 32px;
+}
+
+.promoText {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.promoTitle {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.promoDescription {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.promoDescription a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.promoActions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 140px;
+}
+
+.promoSingleAction {
+  max-width: none;
+}
+
+.promoSingleAction :global(button) {
+  min-width: 0;
+}
+
+.promoActionButton {
+  cursor: pointer;
+  width: fit-content;
+}
+
+.promoActionButton :global(button) {
+  border-radius: 4px;
+  box-shadow: none;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.5;
+  min-height: 40px;
+  padding-left: 16px;
+  padding-right: 16px;
+  width: auto;
+}
+
+.promoPrimaryButton :global(button) {
+  background: #96ef5d;
+  border: 1px solid #96ef5d;
+  color: #191919;
+  min-width: 223px;
+}
+
+.promoPrimaryButton :global(button:hover),
+.promoPrimaryButton :global(button:focus-visible),
+.promoPrimaryButton :global(button:active) {
+  background: #96ef5d;
+  border-color: #96ef5d;
+  color: #191919;
+}
+
+.promoOutlineButton :global(button),
+.promoPauseButton :global(button),
+.bottomOutlineButton :global(button) {
+  background: transparent;
+  border: 1px solid #191919;
+  color: #191919;
+}
+
+.promoOutlineButton :global(button) {
+  min-width: 223px;
+}
+
+.promoPauseButton :global(button) {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  min-width: 223px;
+  white-space: nowrap;
+}
+
+.promoOutlineButton :global(button:hover),
+.promoOutlineButton :global(button:focus-visible),
+.promoOutlineButton :global(button:active),
+.promoPauseButton :global(button:hover),
+.promoPauseButton :global(button:focus-visible),
+.promoPauseButton :global(button:active),
+.bottomOutlineButton :global(button:hover),
+.bottomOutlineButton :global(button:focus-visible),
+.bottomOutlineButton :global(button:active) {
+  background: transparent;
+  border-color: #191919;
+  color: #191919;
+}
+
+.pauseButtonContent {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  line-height: 1;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.pauseButtonLabel {
+  align-items: center;
+  display: inline-flex;
+  line-height: 1.5;
+}
+
+.pauseIcon {
+  align-items: center;
+  color: #191919;
+  display: flex;
+  flex: 0 0 auto;
+  height: 24px;
+  justify-content: center;
+  line-height: 0;
+  width: 24px;
+}
+
+.pauseIconBars {
+  align-items: center;
+  display: inline-flex;
+  gap: 4px;
+  height: 18px;
+  justify-content: center;
+  width: 12px;
+}
+
+.pauseIconBar {
+  background: #191919;
+  border-radius: 2px;
+  display: block;
+  height: 18px;
+  width: 4px;
+}
+
+.promoImageWrap {
+  min-height: 248px;
+}
+
+.promoImage {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sectionTitle {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1;
+  margin: 0;
+}
+
+.copyGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.subheading {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.bulletList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  padding-left: 22px;
+}
+
+.bulletList a {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.divider {
+  background: #ddd6d0;
+  border: 0;
+  height: 1px;
+  margin: 0;
+  width: 100%;
+}
+
+.bodyText {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.question {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.required {
+  color: #b9004b;
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.radioOption {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  min-height: 48px;
+  padding: 8px 0;
+}
+
+.radioInput {
+  appearance: none;
+  background: #ffffff;
+  border: 1px solid #949494;
+  border-radius: 50%;
+  height: 24px;
+  margin: 0;
+  position: relative;
+  width: 24px;
+}
+
+.radioInput:checked {
+  border-color: #4f5ce8;
+}
+
+.radioInput:checked::after {
+  background: #4f5ce8;
+  border-radius: 50%;
+  content: "";
+  height: 10px;
+  left: 6px;
+  position: absolute;
+  top: 6px;
+  width: 10px;
+}
+
+.radioLabel {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.feedbackGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.feedbackLabel {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.28px;
+  line-height: 1.5;
+}
+
+.feedbackInput {
+  border: 1px solid #949494;
+  border-radius: 4px;
+  font: inherit;
+  min-height: 102px;
+  outline: none;
+  padding: 8px 16px;
+  resize: none;
+  width: 100%;
+}
+
+.feedbackInput:focus {
+  border-color: #191919;
+}
+
+.helperText {
+  color: #707070;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.helperText a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.bottomActions {
+  display: flex;
+  gap: 16px;
+}
+
+.bottomPrimaryButton,
+.bottomOutlineButton {
+  flex: 0 0 auto;
+}
+
+.bottomPrimaryButton :global(button),
+.bottomOutlineButton :global(button) {
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.5;
+  min-height: 56px;
+  padding-left: 24px;
+  padding-right: 24px;
+  width: 100%;
+}
+
+.bottomPrimaryButton :global(button) {
+  background: #96ef5d;
+  border: 1px solid #96ef5d;
+  color: #191919;
+  min-height: 48px;
+  width: 223px;
+}
+
+.bottomPrimaryButton :global(button:hover),
+.bottomPrimaryButton :global(button:focus-visible),
+.bottomPrimaryButton :global(button:active) {
+  background: #96ef5d;
+  border-color: #96ef5d;
+  color: #191919;
+}
+
+.bottomOutlineButton :global(button) {
+  min-height: 48px;
+  width: 209px;
+}
+
+.richInfoText {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  gap: 0;
+  line-height: 1.5;
+}
+
+.richInfoText p {
+  margin: 0;
+}
+
+.billingCycleGrid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.billingCard {
+  align-items: flex-start;
+  background: #ffffff;
+  border: 1px solid #8c8c8c;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 126px;
+  padding: 16px 24px;
+  text-align: left;
+  width: 100%;
+}
+
+.billingCardSelected {
+  border: 2px solid #191919;
+  padding: 15px 23px;
+}
+
+.billingTopRow {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.billingOption {
+  align-items: center;
+  display: inline-flex;
+  font-size: 18px;
+  font-weight: 600;
+  gap: 8px;
+  line-height: 1.5;
+}
+
+.billingSaveBadge :global(*) {
+  color: #191919;
+}
+
+.billingSaveBadge :global(div) {
+  background: #9cee69;
+}
+
+.billingRadio {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #949494;
+  border-radius: 50%;
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: 24px;
+  justify-content: center;
+  width: 24px;
+}
+
+.billingCardSelected .billingRadio {
+  border-color: #191919;
+}
+
+.billingRadioDot {
+  background: #191919;
+  border-radius: 50%;
+  height: 12px;
+  width: 12px;
+}
+
+.billingPriceStack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.billingPrice {
+  color: #666666;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.paymentMethodRow {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.paymentMethodInfo {
+  align-items: center;
+  display: inline-flex;
+  gap: 8px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.mastercardIcon {
+  align-items: center;
+  border: 1px solid #ececee;
+  border-radius: 4px;
+  display: inline-flex;
+  height: 24px;
+  justify-content: center;
+  padding: 0 6px;
+  position: relative;
+  width: 40px;
+}
+
+.mastercardRed,
+.mastercardYellow {
+  border-radius: 50%;
+  height: 10px;
+  position: absolute;
+  top: 6px;
+  width: 10px;
+}
+
+.mastercardRed {
+  background: #eb001b;
+  left: 10px;
+}
+
+.mastercardYellow {
+  background: #f79e1b;
+  left: 16px;
+}
+
+.summaryOutlineButton :global(button),
+.confirmPrimaryButton :global(button),
+.confirmOutlineButton :global(button) {
+  border-radius: 4px;
+  box-shadow: none;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+
+.summaryOutlineButton :global(button),
+.confirmOutlineButton :global(button) {
+  background: transparent;
+  border: 1px solid #191919;
+  color: #191919;
+}
+
+.summaryOutlineButton :global(button) {
+  min-height: 48px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.summaryOutlineButton :global(button:hover),
+.summaryOutlineButton :global(button:focus-visible),
+.summaryOutlineButton :global(button:active),
+.confirmOutlineButton :global(button:hover),
+.confirmOutlineButton :global(button:focus-visible),
+.confirmOutlineButton :global(button:active) {
+  background: transparent;
+  border-color: #191919;
+  color: #191919;
+}
+
+.buttonWithLeadingIcon {
+  align-items: center;
+  display: inline-flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.priceBreakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.priceRow,
+.totalRow {
+  align-items: flex-start;
+  display: flex;
+  font-size: 16px;
+  gap: 8px;
+  justify-content: space-between;
+  line-height: 1.5;
+  width: 100%;
+}
+
+.totalRow {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+.confirmPrimaryButton,
+.confirmOutlineButton {
+  flex: 0 0 auto;
+}
+
+.confirmPrimaryButton :global(button),
+.confirmOutlineButton :global(button) {
+  min-height: 48px;
+  padding-left: 16px;
+  padding-right: 16px;
+  width: auto;
+}
+
+.confirmPrimaryButton :global(button) {
+  background: #96ef5d;
+  border: 1px solid #96ef5d;
+  color: #191919;
+}
+
+.confirmPrimaryButton :global(button:hover),
+.confirmPrimaryButton :global(button:focus-visible),
+.confirmPrimaryButton :global(button:active) {
+  background: #96ef5d;
+  border-color: #96ef5d;
+  color: #191919;
+}
+
+.successModalOverlay {
+  align-items: center;
+  background: rgba(25, 25, 25, 0.7);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 24px;
+  position: fixed;
+  z-index: 1000;
+}
+
+.successModal {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  width: min(700px, 100%);
+}
+
+.successModalInner {
+  padding: 24px 40px 40px;
+}
+
+.successModalTopRow {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.successBadge {
+  align-items: center;
+  background: #eaffdc;
+  border-radius: 4px;
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: 48px;
+  justify-content: center;
+  width: 48px;
+}
+
+.successBadge img {
+  display: block;
+  height: 24px;
+  width: 24px;
+}
+
+.successCloseButton {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: 48px;
+  justify-content: center;
+  margin: -12px -12px 0 0;
+  padding: 12px;
+  width: 48px;
+}
+
+.successCloseButton img {
+  display: block;
+  height: 24px;
+  width: 24px;
+}
+
+.successTitle {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1;
+  margin: 0 0 16px;
+  max-width: 520px;
+}
+
+.successBody {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0 0 24px;
+}
+
+.successDoneButton :global(button) {
+  background: #96ef5d;
+  border: 1px solid #96ef5d;
+  border-radius: 4px;
+  box-shadow: none;
+  color: #191919;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.5;
+  min-height: 40px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.successDoneButton :global(button:hover),
+.successDoneButton :global(button:focus-visible),
+.successDoneButton :global(button:active) {
+  background: #96ef5d;
+  border-color: #96ef5d;
+  color: #191919;
+}
+
+.footer {
+  background: #fff5ed;
+  padding: 40px 32px;
+}
+
+.footerInner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 auto;
+  max-width: 1440px;
+}
+
+.footerLinks {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+
+.footerLinkItem {
+  align-items: center;
+  display: inline-flex;
+}
+
+.footerLinks a {
+  color: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+.footerDivider {
+  background: rgba(25, 25, 25, 0.25);
+  display: inline-block;
+  height: 16px;
+  margin: 0 12px;
+  width: 1px;
+}
+
+.footerMeta {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.socialLinks {
+  align-items: center;
+  display: flex;
+  margin-left: -8px;
+}
+
+.socialLinks a {
+  align-items: center;
+  color: inherit;
+  display: inline-flex;
+  height: 48px;
+  justify-content: center;
+  text-decoration: none;
+  width: 48px;
+}
+
+.localeButton {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 8px;
+  padding: 0;
+}
+
+.copyright {
+  color: #666666;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .content {
+    width: 100%;
+  }
+
+  .main {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .topBarInner,
+  .footer {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .promoCard {
+    grid-template-columns: 1fr;
+  }
+
+  .billingCycleGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .promoImageWrap {
+    height: 220px;
+    order: -1;
+  }
+
+  .paymentMethodRow,
+  .bottomActions,
+  .footerMeta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .successModalInner {
+    padding: 24px;
+  }
+
+  .successTitle {
+    max-width: none;
+  }
+}
