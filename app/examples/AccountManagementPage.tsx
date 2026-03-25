@@ -465,10 +465,6 @@ export function AccountManagementPage({
       : isPlusMonthlyFamilyVariant || isPlusAnnualFamilyVariant
         ? "plus"
         : "ultimate";
-  const ultimateDowngradeStoryId = isAnnualVariant
-    ? "layout-account-management-downgrade--ultimate-annual-downgrade"
-    : "layout-account-management-downgrade--ultimate-monthly-downgrade";
-
   const accountSettings: ActionLink[] = [
     {
       href: withHash(externalUrls.myAccount, "profile"),
@@ -1104,6 +1100,9 @@ export function AccountManagementPage({
 
   const config = configs[variant];
   const isAnnualVariant = config.renewalCadence === "annually";
+  const ultimateDowngradeStoryId = isAnnualVariant
+    ? "layout-account-management-downgrade--ultimate-annual-downgrade"
+    : "layout-account-management-downgrade--ultimate-monthly-downgrade";
   const hasSingleAnnualHeroCard = isAnnualVariant && config.promoCards.length === 1;
   const topBarUsage = hasTopBarUsageVariant
     ? config.promoCards.find((card) => card.usage)?.usage
