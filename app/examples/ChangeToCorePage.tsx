@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { Badge, Button, Icon } from "@envato/design-system/components";
+import { Badge, Button, Icon, Message } from "@envato/design-system/components";
 
 import { useExternalUrls } from "../contexts/ExternalUrlsContext.tsx";
 
@@ -38,12 +38,30 @@ function PaymentCardIcon() {
   );
 }
 
+function scrollToTop() {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  window.scrollTo({ top: 0, behavior: "auto" });
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+  window.parent?.scrollTo?.({ top: 0, behavior: "auto" });
+}
+
 export function ChangeToCorePage({ onBack, onCancel, onConfirm }: Props) {
   const externalUrls = useExternalUrls();
   const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">(
     "monthly",
   );
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+
+  useEffect(() => {
+    scrollToTop();
+    requestAnimationFrame(() => {
+      scrollToTop();
+    });
+  }, []);
 
   const pricingUrl = new URL("/pricing", externalUrls.storefront).toString();
   const footerLinks = [
@@ -95,21 +113,20 @@ export function ChangeToCorePage({ onBack, onCancel, onConfirm }: Props) {
               Change to the Core individual plan
             </h1>
 
-            <div className={styles["infoBanner"]}>
-              <div className={styles["infoIcon"]}>
-                <Icon name="info-outlined" size="1x" />
-              </div>
-              <div className={styles["richInfoText"]}>
-                <p>
-                  <strong>
-                    Current plan: Ultimate Individual, renews monthly.
-                  </strong>
-                </p>
-                <p>
-                  Your next payment of $XX.00 (excluding tax and discounts) is
-                  scheduled for Oct 30, 2025 - in 30 days.
-                </p>
-              </div>
+            <div className={styles["infoMessage"]}>
+              <Message variant="info">
+                <div className={styles["richInfoText"]}>
+                  <p>
+                    <strong>
+                      Current plan: Ultimate Individual, renews monthly.
+                    </strong>
+                  </p>
+                  <p>
+                    Your next payment of $XX.00 (excluding tax and discounts) is
+                    scheduled for Oct 30, 2025 - in 30 days.
+                  </p>
+                </div>
+              </Message>
             </div>
 
             <section className={styles["section"]}>
@@ -209,21 +226,20 @@ export function ChangeToCorePage({ onBack, onCancel, onConfirm }: Props) {
                 </div>
               </div>
 
-              <div className={styles["infoBanner"]}>
-                <div className={styles["infoIcon"]}>
-                  <Icon name="info-outlined" size="1x" />
-                </div>
-                <div className={styles["richInfoText"]}>
-                  <p>
-                    <strong>
-                      Your plan will change to Core Individual on March 30, 2025.
-                    </strong>
-                  </p>
-                  <p>
-                    At your next renewal date. The updated price will apply
-                    starting with that billing cycle.
-                  </p>
-                </div>
+              <div className={styles["infoMessage"]}>
+                <Message variant="info">
+                  <div className={styles["richInfoText"]}>
+                    <p>
+                      <strong>
+                        Your plan will change to Core Individual on March 30, 2025.
+                      </strong>
+                    </p>
+                    <p>
+                      At your next renewal date. The updated price will apply
+                      starting with that billing cycle.
+                    </p>
+                  </div>
+                </Message>
               </div>
 
               <p className={styles["bodyText"]}>

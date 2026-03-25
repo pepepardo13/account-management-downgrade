@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button, Icon, Message } from "@envato/design-system/components";
 
@@ -45,6 +45,17 @@ const socialLinks = [
   { href: "https://www.instagram.com/envato/", icon: "instagram", label: "Instagram" },
 ] as const;
 
+function scrollToTop() {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  window.scrollTo({ top: 0, behavior: "auto" });
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+  window.parent?.scrollTo?.({ top: 0, behavior: "auto" });
+}
+
 function FooterDivider() {
   return <span aria-hidden="true" className={styles["footerDivider"]} />;
 }
@@ -87,6 +98,13 @@ export function CancelSubscriptionPage({
   const [futurePlan, setFuturePlan] =
     useState<(typeof resubscribeOptions)[number]>("Unsure");
   const [feedback, setFeedback] = useState("");
+
+  useEffect(() => {
+    scrollToTop();
+    requestAnimationFrame(() => {
+      scrollToTop();
+    });
+  }, []);
 
   const pricingUrl = new URL("/pricing", externalUrls.storefront).toString();
   const switchToAnnualUrl = `${externalUrls.myAccount}#switch-to-annual`;
