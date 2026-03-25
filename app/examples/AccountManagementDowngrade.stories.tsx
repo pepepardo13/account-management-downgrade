@@ -5,6 +5,9 @@ import { AccountManagementPage } from "./AccountManagementPage.tsx";
 const meta = {
   title: "Layout / Account Management Downgrade",
   component: AccountManagementPage,
+  args: {
+    initialScreen: "overview",
+  },
   parameters: {
     layout: "fullscreen",
   },

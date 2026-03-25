@@ -1,11 +1,6 @@
-import { Button } from "@envato/design-system/components";
+import { Button, Icon } from "@envato/design-system/components";
 
 import styles from "./AccountManagementPage.module.scss";
-
-const figmaCheckmarkCircleHref =
-  "https://www.figma.com/api/mcp/asset/dfef6828-2b27-4fb7-bcce-7ac1c2ace157";
-const figmaCloseHref =
-  "https://www.figma.com/api/mcp/asset/0f42c3e7-d508-4dc5-80a8-e68e772667e0";
 
 type Props = {
   chargeAmount: string;
@@ -45,7 +40,7 @@ export function PlanChangeCancellationModal({
           <div className={styles["changeRequestModalTopRow"]}>
             {isSuccessStep ? (
               <div className={styles["changeRequestSuccessBadge"]}>
-                <img alt="" src={figmaCheckmarkCircleHref} />
+                <Icon name="done" size="1x" />
               </div>
             ) : (
               <span />
@@ -57,7 +52,7 @@ export function PlanChangeCancellationModal({
               onClick={onDismiss}
               type="button"
             >
-              <img alt="" src={figmaCloseHref} />
+              <Icon name="clear" size="1x" />
             </button>
           </div>
 

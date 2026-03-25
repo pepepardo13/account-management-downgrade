@@ -9,9 +9,6 @@ import { PlanUpdateSuccessModal } from "./PlanUpdateSuccessModal.tsx";
 
 import styles from "./CancelSubscriptionPage.module.scss";
 
-const figmaInfoHref =
-  "https://www.figma.com/api/mcp/asset/5b96f02b-0d9e-4791-8f77-f3d7cd96e0d3";
-
 type Props = {
   onBack?: () => void;
   onCancel?: () => void;
@@ -100,7 +97,7 @@ export function ChangeToCorePage({ onBack, onCancel, onConfirm }: Props) {
 
             <div className={styles["infoBanner"]}>
               <div className={styles["infoIcon"]}>
-                <img alt="" src={figmaInfoHref} />
+                <Icon name="info-outlined" size="1x" />
               </div>
               <div className={styles["richInfoText"]}>
                 <p>
@@ -214,7 +211,7 @@ export function ChangeToCorePage({ onBack, onCancel, onConfirm }: Props) {
 
               <div className={styles["infoBanner"]}>
                 <div className={styles["infoIcon"]}>
-                  <img alt="" src={figmaInfoHref} />
+                  <Icon name="info-outlined" size="1x" />
                 </div>
                 <div className={styles["richInfoText"]}>
                   <p>

@@ -9,9 +9,6 @@ import envatoHref from "../components/Navigation/HomeLink/envato.svg";
 import cameraImage from "./assets/cancel-subscription-camera.jpg";
 import pauseImage from "./assets/cancel-subscription-pause.jpg";
 import styles from "./CancelSubscriptionPage.module.scss";
-
-const figmaInfoHref =
-  "https://www.figma.com/api/mcp/asset/5b96f02b-0d9e-4791-8f77-f3d7cd96e0d3";
 const annualPlanImageHref =
   "https://www.figma.com/api/mcp/asset/b2eb0642-7c63-4a85-acfe-d500759e36fd";
 
@@ -175,7 +172,7 @@ export function CancelSubscriptionPage({
 
             <div className={styles["infoBanner"]}>
               <div className={styles["infoIcon"]}>
-                <img alt="" src={figmaInfoHref} />
+                <Icon name="info-outlined" size="1x" />
               </div>
               <p className={styles["infoText"]}>
                 Your subscription renews monthly. Your next payment of $00.00

@@ -12,19 +12,6 @@ import { ChangeToPlusPage } from "./ChangeToPlusPage.tsx";
 import { PlanChangeCancellationModal } from "./PlanChangeCancellationModal.tsx";
 
 import styles from "./AccountManagementPage.module.scss";
-
-const figmaCheckmarkCircleOutlinedHref =
-  "https://www.figma.com/api/mcp/asset/0cb4fe90-a493-4fd5-ad84-e95a19c5e003";
-const figmaAiLabsHref =
-  "https://www.figma.com/api/mcp/asset/eb23c786-deb1-4f12-91ee-1497e57e5f26";
-const figmaTopBarAiLabsHref =
-  "https://www.figma.com/api/mcp/asset/246282b7-5103-4142-8e6f-c5edd03b1e45";
-const figmaTopBarChevronDownHref =
-  "https://www.figma.com/api/mcp/asset/445862f2-db9b-4615-8e1b-8d17d7e57d31";
-const figmaTopBarChevronUpHref =
-  "https://www.figma.com/api/mcp/asset/232d94c6-e8ac-4e3c-acb2-ebede8673a24";
-const figmaInfoHref =
-  "https://www.figma.com/api/mcp/asset/5b96f02b-0d9e-4791-8f77-f3d7cd96e0d3";
 const standardSupportingPoints = [
   "Unlimited downloads of 27+ million of creative assets",
   "Lifetime commercial license for all creative assets and AI generations",
@@ -230,20 +217,17 @@ function HeaderUsageGauge({
         <div className={styles["topBarUsageButton"]}>
           <div className={styles["topBarUsageHeader"]}>
             <div className={styles["topBarUsageMeta"]}>
-              <img alt="" src={figmaTopBarAiLabsHref} />
+              <span aria-hidden="true" className={styles["topBarUsageAiLabsIcon"]}>
+                <Icon name="ai-labs" size="1x" />
+              </span>
               <span className={styles["topBarUsageText"]}>
                 {remainingGenerations} Generations remaining
               </span>
             </div>
             <span aria-hidden="true" className={styles["topBarUsageChevron"]}>
-              <img
-                alt=""
-                src={
-                  isExpanded
-                    ? figmaTopBarChevronUpHref
-                    : figmaTopBarChevronDownHref
-                }
-              />
+              <span className={styles["topBarUsageChevronIcon"]}>
+                <Icon name={isExpanded ? "chevron-up" : "chevron-down"} size="1x" />
+              </span>
             </span>
           </div>
         </div>
@@ -1276,7 +1260,7 @@ export function AccountManagementPage({
 
               <div className={styles["planFeature"]}>
                 <span className={styles["planFeatureIcon"]}>
-                  <img alt="" src={figmaAiLabsHref} />
+                  <Icon name="ai-labs" size="1x" />
                 </span>
                 <div className={styles["planFeatureText"]}>
                   <span>Includes</span>
@@ -1296,7 +1280,7 @@ export function AccountManagementPage({
                   {config.planFeature.supportingPoints.map((point) => (
                     <div className={styles["planFeatureSupportingPoint"]} key={point}>
                       <span className={styles["planFeatureIcon"]}>
-                        <img alt="" src={figmaCheckmarkCircleOutlinedHref} />
+                        <Icon name="done" size="1x" />
                       </span>
                       <span>{point}</span>
                     </div>
@@ -1308,7 +1292,7 @@ export function AccountManagementPage({
                 <>
                   <div className={styles["pendingChangeMessage"]}>
                     <div className={styles["pendingChangeIcon"]}>
-                      <img alt="" src={figmaInfoHref} />
+                      <Icon name="info-outlined" size="1x" />
                     </div>
                     <div className={styles["pendingChangeText"]}>
                       <p>

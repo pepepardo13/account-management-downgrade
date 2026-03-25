@@ -101,7 +101,8 @@
   padding-top: 2px;
 }
 
-.infoIcon img {
+.infoIcon img,
+.infoIcon :global(svg) {
   display: block;
   height: 24px;
   width: 24px;
@@ -780,7 +781,8 @@
   width: 48px;
 }
 
-.successBadge img {
+.successBadge img,
+.successBadge :global(svg) {
   display: block;
   height: 24px;
   width: 24px;
@@ -800,7 +802,8 @@
   width: 48px;
 }
 
-.successCloseButton img {
+.successCloseButton img,
+.successCloseButton :global(svg) {
   display: block;
   height: 24px;
   width: 24px;

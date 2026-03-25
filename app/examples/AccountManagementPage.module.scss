@@ -143,14 +143,22 @@
 }
 
 .topBarUsageMeta img,
-.topBarUsageChevron img {
+.topBarUsageMeta :global(svg),
+.topBarUsageChevron img,
+.topBarUsageChevron :global(svg) {
   display: block;
   flex: 0 0 auto;
 }
 
-.topBarUsageMeta img {
+.topBarUsageMeta img,
+.topBarUsageMeta :global(svg) {
   height: 16px;
   width: 16px;
+}
+
+.topBarUsageAiLabsIcon {
+  color: #87e64b;
+  display: inline-flex;
 }
 
 .topBarUsageText {
@@ -167,9 +175,15 @@
   justify-content: center;
 }
 
-.topBarUsageChevron img {
+.topBarUsageChevron img,
+.topBarUsageChevron :global(svg) {
   height: 16px;
   width: 16px;
+}
+
+.topBarUsageChevronIcon {
+  color: #ffffff;
+  display: inline-flex;
 }
 
 .topBarUsageMeter {
@@ -397,7 +411,8 @@
   padding-top: 2px;
 }
 
-.pendingChangeIcon img {
+.pendingChangeIcon img,
+.pendingChangeIcon :global(svg) {
   display: block;
   height: 24px;
   width: 24px;
@@ -478,7 +493,8 @@
   width: 48px;
 }
 
-.changeRequestSuccessBadge img {
+.changeRequestSuccessBadge img,
+.changeRequestSuccessBadge :global(svg) {
   display: block;
   height: 24px;
   width: 24px;
@@ -498,7 +514,8 @@
   width: 48px;
 }
 
-.changeRequestCloseButton img {
+.changeRequestCloseButton img,
+.changeRequestCloseButton :global(svg) {
   display: block;
   height: 24px;
   width: 24px;
