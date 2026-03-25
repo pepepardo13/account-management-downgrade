@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Button, Icon } from "@envato/design-system/components";
+import { Button, Icon, Message } from "@envato/design-system/components";
 
 import { useExternalUrls } from "../contexts/ExternalUrlsContext.tsx";
 
@@ -170,15 +170,10 @@ export function CancelSubscriptionPage({
           <section className={styles["body"]}>
             <h1 className={styles["pageTitle"]}>Cancel Subscription</h1>
 
-            <div className={styles["infoBanner"]}>
-              <div className={styles["infoIcon"]}>
-                <Icon name="info-outlined" size="1x" />
-              </div>
-              <p className={styles["infoText"]}>
-                Your subscription renews monthly. Your next payment of $00.00
-                (excluding tax) is scheduled for Feb 16, 2025 - in 20 days.
-              </p>
-            </div>
+            <Message variant="info">
+              Your subscription renews monthly. Your next payment of $00.00
+              (excluding tax) is scheduled for Feb 16, 2025 {"\u2014"} in 20 days.
+            </Message>
 
             <section className={styles["promoSection"]}>
               <article className={styles["promoCard"]}>
