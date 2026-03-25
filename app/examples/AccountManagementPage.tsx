@@ -324,12 +324,12 @@ function PromoCardView({
           {(!hasCollapsibleUsage || isUsageExpanded) && (
             <div className={styles["usageDetails"]}>
               <div className={styles["usageDetailRow"]}>
-                <span>Total generations</span>
-                <span>{card.usage.total}</span>
+                <span className={styles["usageDetailText"]}>Total generations</span>
+                <span className={styles["usageDetailText"]}>{card.usage.total}</span>
               </div>
               <div className={styles["usageDetailRow"]}>
-                <span>Plan resets</span>
-                <span>{card.usage.resetDate}</span>
+                <span className={styles["usageDetailText"]}>Plan resets</span>
+                <span className={styles["usageDetailText"]}>{card.usage.resetDate}</span>
               </div>
             </div>
           )}
