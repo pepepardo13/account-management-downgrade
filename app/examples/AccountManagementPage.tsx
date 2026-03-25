@@ -222,7 +222,7 @@ function HeaderUsageGauge({
                 <Icon name="ai-labs" size="1x" />
               </span>
               <span className={styles["topBarUsageText"]}>
-                {remainingGenerations} Generations remaining
+                {remainingGenerations} AI Generations remaining
               </span>
             </div>
             <span aria-hidden="true" className={styles["topBarUsageChevron"]}>
@@ -292,7 +292,7 @@ function PromoCardView({
       {hasVisibleUsage && card.usage && (
         <div className={styles["usageMeter"]}>
           <div className={styles["usageMeta"]}>
-            <strong>{remainingGenerations} Generations remaining</strong>
+            <strong>{remainingGenerations} AI Generations remaining</strong>
             {hasCollapsibleUsage ? (
               <button
                 aria-expanded={isUsageExpanded}
@@ -682,7 +682,7 @@ export function AccountManagementPage({
       nextPaymentAmount: "USD $00.00",
       nextPaymentDate: "Nov 27, 2025",
       nextPaymentDays: 360,
-      planFeature: { count: "10" },
+      planFeature: { count: "10", supportingPoints: standardSupportingPoints },
       promoCards: [
         {
           title: "Elevate your plan!",
@@ -1277,7 +1277,7 @@ export function AccountManagementPage({
                   {config.planFeature.supportingPoints.map((point) => (
                     <div className={styles["planFeatureSupportingPoint"]} key={point}>
                       <span className={styles["planFeatureIcon"]}>
-                        <Icon name="done" size="1x" />
+                        <Icon name="checkmark-circle-outlined" size="1x" />
                       </span>
                       <span>{point}</span>
                     </div>

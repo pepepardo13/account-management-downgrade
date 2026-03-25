@@ -391,6 +391,12 @@
   line-height: 1.5;
 }
 
+.planFeatureSupportingPoint > span:last-child {
+  align-items: center;
+  display: inline-flex;
+  min-height: 20px;
+}
+
 .pendingChangeMessage {
   align-items: flex-start;
   background: #f0f1ff;
