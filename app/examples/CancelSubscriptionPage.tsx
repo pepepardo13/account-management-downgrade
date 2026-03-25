@@ -16,6 +16,7 @@ type Props = {
   onBack?: () => void;
   onChangeToCore?: () => void;
   onChangeToPlus?: () => void;
+  onChangeToUltimate?: () => void;
   onKeepSubscription?: () => void;
   planType?: "core" | "plus" | "ultimate";
   showAnnualSwitchBanner?: boolean;
@@ -89,6 +90,7 @@ export function CancelSubscriptionPage({
   onBack,
   onChangeToCore,
   onChangeToPlus,
+  onChangeToUltimate,
   onKeepSubscription,
   planType = "ultimate",
   showAnnualSwitchBanner = false,
@@ -108,7 +110,6 @@ export function CancelSubscriptionPage({
 
   const pricingUrl = new URL("/pricing", externalUrls.storefront).toString();
   const switchToAnnualUrl = `${externalUrls.myAccount}#switch-to-annual`;
-  const stayInPrototype = () => undefined;
   const footerLinks = [
     { href: externalUrls.storefront, label: "About Elements" },
     { href: pricingUrl, label: "Plans & Pricing" },
@@ -128,7 +129,7 @@ export function CancelSubscriptionPage({
     planType === "core"
       ? {
           label: "Change to Ultimate",
-          onActivate: stayInPrototype,
+          onActivate: () => onChangeToUltimate?.(),
         }
       : planType === "plus"
         ? {
@@ -149,7 +150,7 @@ export function CancelSubscriptionPage({
       : planType === "plus"
         ? {
             label: "Change to Ultimate",
-            onActivate: stayInPrototype,
+            onActivate: () => onChangeToUltimate?.(),
           }
         : {
             label: "Change to Core",

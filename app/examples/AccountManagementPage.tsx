@@ -132,6 +132,17 @@ function navigateToUrl(url: string, external?: boolean) {
   window.location.assign(url);
 }
 
+function navigateToStory(storyId: string) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  const url = new URL(window.location.href);
+  url.searchParams.set("id", storyId);
+  url.searchParams.set("viewMode", "story");
+  window.location.assign(url.toString());
+}
+
 function scrollToTop() {
   if (typeof window === "undefined") {
     return;
@@ -324,12 +335,20 @@ function PromoCardView({
           {(!hasCollapsibleUsage || isUsageExpanded) && (
             <div className={styles["usageDetails"]}>
               <div className={styles["usageDetailRow"]}>
-                <span className={styles["usageDetailText"]}>Total generations</span>
-                <span className={styles["usageDetailText"]}>{card.usage.total}</span>
+                <span className={styles["usageDetailText"]} style={{ fontSize: "14px", lineHeight: 1.5 }}>
+                  Total generations
+                </span>
+                <span className={styles["usageDetailText"]} style={{ fontSize: "14px", lineHeight: 1.5 }}>
+                  {card.usage.total}
+                </span>
               </div>
               <div className={styles["usageDetailRow"]}>
-                <span className={styles["usageDetailText"]}>Plan resets</span>
-                <span className={styles["usageDetailText"]}>{card.usage.resetDate}</span>
+                <span className={styles["usageDetailText"]} style={{ fontSize: "14px", lineHeight: 1.5 }}>
+                  Plan resets
+                </span>
+                <span className={styles["usageDetailText"]} style={{ fontSize: "14px", lineHeight: 1.5 }}>
+                  {card.usage.resetDate}
+                </span>
               </div>
             </div>
           )}
@@ -446,6 +465,9 @@ export function AccountManagementPage({
       : isPlusMonthlyFamilyVariant || isPlusAnnualFamilyVariant
         ? "plus"
         : "ultimate";
+  const ultimateDowngradeStoryId = isAnnualVariant
+    ? "layout-account-management-downgrade--ultimate-annual-downgrade"
+    : "layout-account-management-downgrade--ultimate-monthly-downgrade";
 
   const accountSettings: ActionLink[] = [
     {
@@ -1155,6 +1177,7 @@ export function AccountManagementPage({
           onBack={() => setScreenAndScroll("overview")}
           onChangeToCore={() => setScreenAndScroll("change-to-core")}
           onChangeToPlus={() => setScreenAndScroll("change-to-plus")}
+          onChangeToUltimate={() => navigateToStory(ultimateDowngradeStoryId)}
           onKeepSubscription={() => setScreenAndScroll("overview")}
           planType={cancelPagePlanType}
           showAnnualSwitchBanner={
