@@ -93,6 +93,7 @@ export type AccountManagementVariant =
 
 type Props = {
   variant?: AccountManagementVariant;
+  enableDowngradeJourney?: boolean;
   initialScreen?:
     | "overview"
     | "cancel-subscription"
@@ -370,6 +371,7 @@ function PromoCardView({
 
 export function AccountManagementPage({
   variant = "core-monthly",
+  enableDowngradeJourney = false,
   initialScreen = "overview",
 }: Props) {
   const externalUrls = useExternalUrls();
@@ -429,12 +431,7 @@ export function AccountManagementPage({
   const cookiesUrl = `${externalUrls.privacyPolicy}#cookies`;
   const cookieSettingsUrl = `${externalUrls.privacyPolicy}#cookie-settings`;
   const hasDowngradeJourneyVariant =
-    isCoreMonthlyV2Variant ||
-    isCoreAnnualV2Variant ||
-    isPlusMonthlyV2Variant ||
-    isPlusAnnualV2Variant ||
-    isUltimateMonthlyV2Variant ||
-    isUltimateAnnualV2Variant;
+    enableDowngradeJourney || initialScreen !== "overview";
   const cancelPagePlanType =
     isCoreMonthlyFamilyVariant || isCoreAnnualFamilyVariant
       ? "core"

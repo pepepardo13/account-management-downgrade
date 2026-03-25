@@ -6,6 +6,7 @@ const meta = {
   title: "Layout / Account Management Downgrade",
   component: AccountManagementPage,
   args: {
+    enableDowngradeJourney: true,
     initialScreen: "overview",
   },
   parameters: {
@@ -43,7 +44,7 @@ export const CoreMonthlyAltDowngrade: Story = {
 export const CoreAnnualDowngrade: Story = {
   name: "Core Annual - Downgrade",
   args: {
-    variant: "core-annual-v2",
+    variant: "core-annual",
   },
 };
 
