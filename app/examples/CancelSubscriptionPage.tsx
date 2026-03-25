@@ -170,10 +170,14 @@ export function CancelSubscriptionPage({
           <section className={styles["body"]}>
             <h1 className={styles["pageTitle"]}>Cancel Subscription</h1>
 
-            <Message variant="info">
-              Your subscription renews monthly. Your next payment of $00.00
-              (excluding tax) is scheduled for Feb 16, 2025 {"\u2014"} in 20 days.
-            </Message>
+            <div className={styles["infoMessage"]}>
+              <Message variant="info">
+                <p className={styles["infoMessageText"]}>
+                  Your subscription renews monthly. Your next payment of $00.00
+                  (excluding tax) is scheduled for Feb 16, 2025 {"\u2014"} in 20 days.
+                </p>
+              </Message>
+            </div>
 
             <section className={styles["promoSection"]}>
               <article className={styles["promoCard"]}>

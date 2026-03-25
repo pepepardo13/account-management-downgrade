@@ -1094,6 +1094,16 @@ export function AccountManagementPage({
     });
   }
 
+  function setScreenAndScroll(
+    nextScreen: "overview" | "cancel-subscription" | "change-to-plus" | "change-to-core",
+  ) {
+    setScreen(nextScreen);
+    scrollToTop();
+    requestAnimationFrame(() => {
+      scrollToTop();
+    });
+  }
+
   useEffect(() => {
     if (screen !== "overview" || !pendingPlanChange) {
       return;
@@ -1134,10 +1144,10 @@ export function AccountManagementPage({
     return (
       <Bleed uniform="3x">
         <CancelSubscriptionPage
-          onBack={() => setScreen("overview")}
-          onChangeToCore={() => setScreen("change-to-core")}
-          onChangeToPlus={() => setScreen("change-to-plus")}
-          onKeepSubscription={() => setScreen("overview")}
+          onBack={() => setScreenAndScroll("overview")}
+          onChangeToCore={() => setScreenAndScroll("change-to-core")}
+          onChangeToPlus={() => setScreenAndScroll("change-to-plus")}
+          onKeepSubscription={() => setScreenAndScroll("overview")}
           planType={cancelPagePlanType}
           showAnnualSwitchBanner={
             isUltimateMonthlyV2Variant || isPlusMonthlyV2Variant || isCoreMonthlyV2Variant
@@ -1151,11 +1161,11 @@ export function AccountManagementPage({
     return (
       <Bleed uniform="3x">
         <ChangeToCorePage
-          onBack={() => setScreen("cancel-subscription")}
-          onCancel={() => setScreen("cancel-subscription")}
+          onBack={() => setScreenAndScroll("cancel-subscription")}
+          onCancel={() => setScreenAndScroll("cancel-subscription")}
           onConfirm={() => {
             setPendingPlanChange("core");
-            setScreen("overview");
+            setScreenAndScroll("overview");
           }}
         />
       </Bleed>
@@ -1166,11 +1176,11 @@ export function AccountManagementPage({
     return (
       <Bleed uniform="3x">
         <ChangeToPlusPage
-          onBack={() => setScreen("cancel-subscription")}
-          onCancel={() => setScreen("cancel-subscription")}
+          onBack={() => setScreenAndScroll("cancel-subscription")}
+          onCancel={() => setScreenAndScroll("cancel-subscription")}
           onConfirm={() => {
             setPendingPlanChange("plus");
-            setScreen("overview");
+            setScreenAndScroll("overview");
           }}
         />
       </Bleed>
