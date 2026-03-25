@@ -108,7 +108,7 @@ export function CancelSubscriptionPage({
 
   const pricingUrl = new URL("/pricing", externalUrls.storefront).toString();
   const switchToAnnualUrl = `${externalUrls.myAccount}#switch-to-annual`;
-  const changeToUltimateUrl = `${pricingUrl}?plan=ultimate`;
+  const stayInPrototype = () => undefined;
   const footerLinks = [
     { href: externalUrls.storefront, label: "About Elements" },
     { href: pricingUrl, label: "Plans & Pricing" },
@@ -128,7 +128,7 @@ export function CancelSubscriptionPage({
     planType === "core"
       ? {
           label: "Change to Ultimate",
-          onActivate: () => window.location.assign(changeToUltimateUrl),
+          onActivate: stayInPrototype,
         }
       : planType === "plus"
         ? {
@@ -149,7 +149,7 @@ export function CancelSubscriptionPage({
       : planType === "plus"
         ? {
             label: "Change to Ultimate",
-            onActivate: () => window.location.assign(changeToUltimateUrl),
+            onActivate: stayInPrototype,
           }
         : {
             label: "Change to Core",
