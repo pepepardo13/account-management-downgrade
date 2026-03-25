@@ -246,12 +246,20 @@ function HeaderUsageGauge({
       {isExpanded ? (
         <div className={styles["topBarUsageDetails"]}>
           <div className={styles["topBarUsageDetailRow"]}>
-            <span>Total generations</span>
-            <span className={styles["topBarUsageValue"]}>{usage.total}</span>
+            <span className={styles["topBarUsageDetailText"]}>Total generations</span>
+            <span
+              className={`${styles["topBarUsageDetailText"]} ${styles["topBarUsageValue"]}`}
+            >
+              {usage.total}
+            </span>
           </div>
           <div className={styles["topBarUsageDetailRow"]}>
-            <span>Plan resets</span>
-            <span className={styles["topBarUsageValue"]}>{usage.resetDate}</span>
+            <span className={styles["topBarUsageDetailText"]}>Plan resets</span>
+            <span
+              className={`${styles["topBarUsageDetailText"]} ${styles["topBarUsageValue"]}`}
+            >
+              {usage.resetDate}
+            </span>
           </div>
         </div>
       ) : null}
